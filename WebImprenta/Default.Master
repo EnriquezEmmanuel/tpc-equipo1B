@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="WebImprenta.Default" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Content/estilos-propios.css") %>"/>
+	<link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Content/estilos-prefijados-propios.css") %>"/>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <section id="menu-usuario">
+		        <div id="menu">
+			        <ul>
+				        <li><a href="">Inicio</a></li>
+				        <li><a href="">Login</a></li>
+				        <li><a href="">Pedidos<div class="adv-numerica alineacion-centrado-centrado">3</div></a></li>
+				        <li><a href="">Catalogo de productos</a></li>
+				        <li><a href="">Envios</a></li>
+			        </ul>
+		        </div>
+	        </section>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+        </div>
+        <footer>
+			<div class="contenedor-v medio alineacion-inicio-centrado">
+			
+				<div class="contenedor-v alineacion-inicio-inicio">
+					<h3>Seguinos</h3>
+					<a href="">@Print360</a>
+					<a href="">Print360</a>
+				</div>
+			</div>
+			<div class="contenedor-v medio alineacion-inicio-centrado">
+				<div class="contenedor-v alineacion-inicio-inicio">
+					<h3>Encontranos</h3>
+					<a href="">Recepcion@Print360.com</a>
+					<a href="">Av. Marquez 123, San Isidro.</a>
+				</div>
+			</div>
+		</footer>
+    </form>
+</body>
+</html>

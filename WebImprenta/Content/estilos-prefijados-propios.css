@@ -1,0 +1,217 @@
+﻿/*-------------------------------------------------------------------------------------*/
+/*-------------------------------- ESTILOS FLEXBOX ------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+
+
+/*----------- CONTENEDORES ---------------*/
+.contenedor-h {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.contenedor-v {
+    display: flex;
+    flex-direction: column;
+}
+
+.slide { /*--Declarar después de un contenedor --*/
+    overflow: hidden;
+    height: 25em;
+    justify-content: center;
+}
+
+.tablon-claro {
+    display: flex;
+    padding: .2em 4em .2em 4em;
+    flex-wrap: wrap;
+    font: 1em Roboto Slab Light;
+    background-color: var(--blancoGastado);
+    color: black;
+    border-radius: 12px;
+    margin: 2em 0 0 2em;
+    width: 70%;
+}
+.tablon-oscuro {
+    display: flex;
+    padding: .2em 4em .2em 4em;
+    flex-wrap: wrap;
+    font: 1em Roboto Slab Light;
+    background-color: var(--azulCasiOscuro);
+    color: var(--blancoGastado);
+    border-radius: 12px;
+    margin: 2em 0 0 2em;
+    width: 70%;
+}
+
+.titular-flotante-v {
+    display: flex;
+    width: 100%;
+    padding: 2em;
+}
+
+.contenido-flotante-v {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.cabecera {
+    background-color: var(--celeste);
+    /*width: 200px;*/
+    text-align: center;
+}
+.filas-grilla:nth-child(2n) {
+    background-color: var(--azulCasiOscuro);
+}
+
+/*----------- DIVISIONES ---------------*/
+.entero {
+    flex-basis: 100%;
+}
+
+.medio {
+    flex-basis: 40%;
+    flex-grow: 1;
+    padding-left: 4em;
+}
+
+.tercio {
+    flex-basis: 33.3%;
+}
+/*----------- ALINEACIONES FLEX ---------------*/
+
+.alineacion-inicio-inicio {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.alineacion-inicio-centrado {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.alineacion-inicio-final {
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.alineacion-centrado-inicio {
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.alineacion-centrado-centrado {
+    justify-content: center;
+    align-items: center;
+}
+
+.alineacion-centrado-final {
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.alineacion-final-inicio {
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.alineacion-final-centrado {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.alineacion-final-final {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+
+
+/*----------- FORMULARIOS ---------------*/
+
+.campos-formulario, .campos-formulario-bloqueado {
+    border: 0px;
+    background-color: var(--azulOscuro);
+    margin: 1em;
+    color: var(--blancoGastado);
+    font: 1em Roboto Slab;
+}
+
+.select-oscuro {
+    border: none;
+    background-color: var(--azulCasiOscuro);
+    color: var(--casiBlanco);
+    font: 1em Roboto Slab;
+    margin: 0 3em 0 1em;
+}
+
+input:focus, select:focus, img:focus, a:focus, button:focus, p:focus, div:focus, p:focus, h1:focus, h2:focus, h3:focus, textarea:focus, span:focus {
+    /*outline: 2px solid #902961;*/
+    outline: none;
+    box-shadow: 0 0 20px var(--fuxia);
+}
+
+/*----------- BOTONES ---------------*/
+.botonera {
+    padding: 3em;
+}
+
+.botonera2 {
+    padding: .5em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.boton-formulario {
+    font: 1,2em Roboto 100;
+    background-color: var(--azulCasiOscuro);
+    color: var(--casiBlanco);
+    border-radius: 10px;
+    border-style: none;
+    padding: 1em;
+    margin: 1em;
+    border: 2px solid var(--celeste);
+}
+
+.boton-formulario-estrecho {
+    font: 1,2em Roboto 100;
+    background-color: var(--azulCasiOscuro);
+    color: var(--casiBlanco);
+    border-radius: 10px;
+    border-style: none;
+    padding: .2em;
+    margin: .2em;
+    border: 2px solid var(--celeste);
+}
+
+.boton-bloqueado {
+    border: 2px solid var(--azulCasiOscuro);
+    color: var(--blancoGastado);
+}
+
+/*---------------------Estados------------------------*/
+.oculto{
+    display:none;
+}
+.invisible{
+    visibility:hidden;
+}
+/*--------------- Tamaño de imagen ------------------*/
+
+.imagen-300-px {
+    width: 300px;
+    margin: 0 2em 0 2em;
+}
+
+footer {
+    display: flex;
+    background-color: black;
+    width: 100%;
+    height: 30vh;
+}
+
+li {
+    list-style: none;
+}

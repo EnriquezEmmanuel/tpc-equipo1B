@@ -1,0 +1,132 @@
+﻿@import url('fuentes.css');
+
+
+:root {
+    --casiBlanco: #eaeded;
+    --blancoGastado: #95a5a6;
+    --azulOscuro: #283747;
+    --azulCasiOscuro: #2e4053;
+    --celeste: #2980b9;
+    --fuxia: #b03177;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-family: Roboto;
+    background-color: var(--azulOscuro);
+    color: var(--casiBlanco);
+}
+
+a {
+    text-decoration: none;
+    font-family: Roboto;
+    color: var(--celeste);
+    font-size: 1.2em;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+td {
+    text-align: right;
+}
+
+
+/*.medio:nth-child(2){ background-color:yellow; }*/
+
+#menu-usuario {
+    width: 100vw;
+    display: flex;
+    background-color: black;
+}
+
+#menu li {
+    list-style: none;
+    display: inline;
+    margin-left: 2em;
+}
+
+.adv-numerica {
+    display: inline flex;
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+    font: .8em Roboto;
+    color: white;
+    background-color: var(--fuxia);
+    border-radius: 10px;
+    z-index: 15;
+    /* display:none; */
+}
+
+.Secciones:nth-child(2) {
+    margin-top: 3em;
+}
+
+.Secciones {
+    display: flex;
+    flex-basis: 80%;
+    padding-top: 3em;
+}
+/*
+#contenedor-grilla {
+    padding: 4em 0 0 4em;
+}
+*/
+#ventana-modal {
+    position: fixed;
+    top: 20%;
+    left: 17%;
+    width: 30%;
+    padding: 4em;
+    background-color: var(--azulCasiOscuro);
+    box-shadow: 0 0 20px var(--fuxia);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    font: 1em Roboto Slab;
+    border-radius: 5px;
+}
+/*----------------------*/
+#sec-titular {
+    margin-top: 5%; /*Quitar esto*/
+    height: 70vh;
+    font-family: Roboto Slab;
+    font-weight: 100;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+    #sec-titular::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://www.onlineprinters.es/blog/wp-content/uploads/2022/07/Imagebroschure_Impressed.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        opacity: 0.5;
+        z-index: -1;
+    }
+
+    #sec-titular h1 {
+        font-size: 4.5em;
+        box-shadow: 0 20px 1px var(--celeste);
+    }
+
+#slogan {
+    margin: 3em 0 3em 0;
+    font: 2.4em Roboto Slab;
+    transform: skewX(-15deg);
+}
+
+/*----------------------*/

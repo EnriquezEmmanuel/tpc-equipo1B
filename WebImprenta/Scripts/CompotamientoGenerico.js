@@ -1,0 +1,26 @@
+﻿addEventListener('load', inicio, false);
+
+function inicio() {
+	Id('btn-abrir-modal').addEventListener('click', activarModal, false);
+	Id('btn-cerrar-modal').addEventListener('click', quitarModal, false);
+	Id('aceptar-modal').addEventListener('click', quitarModal, false);
+}
+
+//-------------------------------------------------------------------
+
+function Id(elem) { return document.getElementById(elem); }
+function Class(elem) { return document.getElementsByClassName(elem); }
+
+function AlternarEstadoModal() {
+	Id('ventana-modal').style == 'display:none;'? Id('ventana-modal').style = 'display:flex;': Id('ventana-modal').style = 'display:none;';
+	return false;
+}
+
+function quitarModal(e) {
+	e.preventDefault();
+	Id('ventana-modal').style = 'display:none;'
+}
+function activarModal(e) {
+	e.preventDefault();
+	Id('ventana-modal').style = 'display:flex;'
+}

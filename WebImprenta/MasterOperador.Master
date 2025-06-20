@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterOperador.Master.cs" Inherits="WebImprenta.Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Operador Imprenta</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript" src="Scripts/CompotamientoGenerico.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Content/estilos-propios.css") %>"/>
+	<link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Content/estilos-prefijados-propios.css") %>"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <section id="menu-usuario">
+		        <div id="menu">
+			        <ul>
+				        <li><a href="PagePedidos.aspx">Pedidos<div class="adv-numerica alineacion-centrado-centrado" runat="server" id="divAdvertencia"></div></a></li>
+				        <li><a href="PageEnvios.aspx">Envios</a></li>
+				        <li><a href="PageMensajes.aspx">Mensajes</a></li>
+				        <!--li><a href="#Pagos">Pagos</a></!--li>
+				        <li><a href="#Catalogo">Catalogo de productos</a></li-->
+			        </ul>
+		        </div>
+	        </section>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>            
+        </div>
+    </form>
+</body>
+</html>
