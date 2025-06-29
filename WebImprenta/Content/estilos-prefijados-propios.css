@@ -1,4 +1,4 @@
-﻿/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
 /*-------------------------------- ESTILOS FLEXBOX ------------------------------------*/
 /*-------------------------------------------------------------------------------------*/
 
@@ -78,6 +78,30 @@
 
 .tercio {
     flex-basis: 33.3%;
+}
+.entero-v {
+    height: 100vh;
+    margin-bottom: 2em;
+}
+
+.medio-v {
+    height: 40vh;
+    margin-bottom: 2em;
+}
+
+.tercio-v {
+    height: 33.3vh;
+    margin-bottom: 2em;
+}
+
+.cuarto-v {
+    height: 25vh;
+    margin-bottom: 2em;
+}
+
+.octavo-v {
+    height: 13vh;
+    margin-bottom: 2em;
 }
 /*----------- ALINEACIONES FLEX ---------------*/
 
@@ -214,4 +238,77 @@ footer {
 
 li {
     list-style: none;
+}
+/*----------------- Titulares --------------------*/
+
+.titular-h1 {
+    font-size: 2em;
+    margin-top: 5%; /*Quitar esto*/
+    margin-bottom: 1em;
+    box-shadow: 0 20px 1px var(--celeste);
+}
+
+.titular-h2 {
+    margin-top: 1em; /*Quitar esto*/
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.titular-h3 {
+    margin-top: 1em; /*Quitar esto*/
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+/*----------------- Texto --------------------*/
+.txt-normal {
+    font-style: normal;
+    font-weight: normal;
+}
+.txt-bold {
+    font-weight: bold;
+}
+
+.txt-oblique {
+    font-style: oblique;
+}
+
+.txt-bold-oblique {
+    font-style: oblique;
+    font-weight: bold;
+}
+/*----------------- Margenes --------------------*/
+.margen-left-5vw {
+    margin-left: 5vw;
+}
+
+.margen-left-10vw {
+    margin-left: 10vw;
+}
+
+.margen-left-15vw {
+    margin-left: 15vw;
+}
+
+.margen-top-1vw {
+    margin-top: 1vw;
+}
+
+.margen-top-2vw {
+    margin-top: 2vw;
+}
+
+.margen-top-3em {
+    margin-top: 3vw;
+}
+
+.margen-bottom-1vw {
+    margin-bottom: 1vw;
+}
+
+.margen-bottom-2em {
+    margin-bottom: 2vw;
+}
+
+.margen-bottom-3vw {
+    margin-bottom: 3vw;
 }

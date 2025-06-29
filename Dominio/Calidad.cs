@@ -10,7 +10,7 @@ namespace Dominio
     {
         public int Id{get;set;}
         public string Color{get;set;}
-        public string Caracteristica{get;set;}
-        public float Porcentaje{get;set;} // Podría ser decimal
+        public string Tipo{get;set;}
+        public decimal Porcentaje{get;set;}
     }
 }
