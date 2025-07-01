@@ -10,6 +10,8 @@ namespace Negocio
 {
     public class PedidoNegocio
     {
+        public List<Hoja> ListaHojas { get; set; }
+        public List<Calidad> ListaCalidad { get; set; }
         public List<Pedido> lista()
         {
             List<Pedido> lista = new List<Pedido>();
@@ -24,17 +26,27 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Pedido aux = new Pedido();
+
                     aux.IdPedido = (int)datos.Lector["IdPedido"];
                     aux.NombreUsuario = (string)datos.Lector["Nombre"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
 
-                    aux.IdHoja = (int)datos.Lector["IdHoja"];
-                    aux.IdCalidad = (int)datos.Lector["IdCalidad"];
+                    HojaNegocio hNegocio = new HojaNegocio();
+                    ListaHojas = hNegocio.lista(); 
+                    aux.Hoja = new Hoja();
+                    aux.Hoja = ListaHojas.Find(x => x.Id == (int)datos.Lector["IdHoja"]);
+
+                    CalidadNegocio cNegocio = new CalidadNegocio();
+                    ListaCalidad = cNegocio.lista();
+                    aux.Calidad = new Calidad();
+                    aux.Calidad = ListaCalidad.Find(x => x.Id == (int)datos.Lector["IdCalidad"]);
+
                     aux.CopiaPorHoja = (int)datos.Lector["CopiaPorHoja"];
                     aux.Margenes = (bool)datos.Lector["Margenes"];
                     aux.Copias = (int)datos.Lector["Copias"];
-                    aux.Estado = (string)datos.Lector["Estado"];
+
+                    aux.Estado = (string)datos.Lector["Estado"];// ahora lo corrijo
 
                     lista.Add(aux);
                 }

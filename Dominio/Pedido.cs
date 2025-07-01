@@ -14,8 +14,8 @@ namespace Dominio
         public string NombreUsuario { get; set; }
         public string Email { get; set; }
         public DateTime Fecha { get; set; }
-        public int IdHoja { get; set; }
-        public int IdCalidad { get; set; }
+        public Hoja Hoja{ get; set; }
+        public Calidad Calidad { get; set; }
         public int CopiaPorHoja { get; set; }
         public bool Margenes { get; set; }
         public int Copias { get; set; }

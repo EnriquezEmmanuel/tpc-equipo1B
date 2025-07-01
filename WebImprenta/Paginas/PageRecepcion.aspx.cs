@@ -13,8 +13,6 @@ namespace WebImprenta.Paginas
     public partial class PageRecepcion : System.Web.UI.Page
     {
         public List<Pedido> ListaPedidos { get; set; }
-        public List<Hoja> ListaHojas { get; set; }
-        public List<Calidad> ListaCalidad { get; set; }
         public List<EstadoPedido> ListaEstadoPedidos { get; set; }
         protected string textoRelleno = "";
         //protected Pedido PedidoSeleccionado { get; set; }
@@ -31,10 +29,7 @@ namespace WebImprenta.Paginas
             {
                 PedidoNegocio pNegocio = new PedidoNegocio();
                 ListaPedidos = pNegocio.lista(); // g u a r d a r   e n   s e s i ó n
-                HojaNegocio hNegocio = new HojaNegocio();
-                ListaHojas = hNegocio.lista(); // g u a r d a r   e n   s e s i ó n
-                CalidadNegocio cNegocio = new CalidadNegocio();
-                ListaCalidad = cNegocio.lista(); // g u a r d a r   e n   s e s i ó n
+                HojaNegocio hNegocio = new HojaNegocio();                
                 EstadoPedidoNegocio eNegocio = new EstadoPedidoNegocio();
                 ListaEstadoPedidos = eNegocio.lista(); // g u a r d a r   e n   s e s i ó n                
 
@@ -112,17 +107,16 @@ namespace WebImprenta.Paginas
                 TextoModal.Text = PedidoSeleccionado.NombreUsuario;
 
                 //----------- Detalle del pedido seleccionado -----------
-                Hoja HojaPedido = ListaHojas.Find(x => x.Id == PedidoSeleccionado.IdHoja);
-                Calidad CalidadPedido = ListaCalidad.Find(x => x.Id == PedidoSeleccionado.IdCalidad);
+                
 
                 lblEstadoPedido.Text = PedidoSeleccionado.Estado;
                 lblnroPedido.Text = PedidoSeleccionado.IdPedido.ToString();
                 lblNombreU.Text = PedidoSeleccionado.NombreUsuario;
-                lblTamanio.Text = HojaPedido.Tamaño;
-                lblTipo.Text = HojaPedido.TipoPapel;
-                lblGramaje.Text = HojaPedido.Gramaje;
-                lblColor.Text = CalidadPedido.Color;
-                lblCalidad.Text = CalidadPedido.Tipo;
+                lblTamanio.Text = PedidoSeleccionado.Hoja.Tamaño;
+                lblTipo.Text = PedidoSeleccionado.Hoja.TipoPapel;
+                lblGramaje.Text = PedidoSeleccionado.Hoja.Gramaje;
+                lblColor.Text = PedidoSeleccionado.Calidad.Color;
+                lblCalidad.Text = PedidoSeleccionado.Calidad.Tipo;
                 lblCopasXhoja.Text = PedidoSeleccionado.CopiaPorHoja.ToString();
                 lblCantidad.Text = PedidoSeleccionado.Copias.ToString();
                 if (PedidoSeleccionado.Margenes)
@@ -177,6 +171,7 @@ namespace WebImprenta.Paginas
 
                 if (!(ddlListaEstados.SelectedValue is null))
                 {
+    //////////////////////hay un error acá
                     PNegocio.ModificarEstado(PedidoSeleccionado.IdPedido, ddlListaEstados.SelectedValue);
                     Response.Redirect(Request.RawUrl);
                 }
