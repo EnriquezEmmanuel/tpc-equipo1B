@@ -28,6 +28,7 @@ namespace Negocio
                     aux.Color = (string)datos.Lector["Color"];
                     aux.Tipo = (string)datos.Lector["Calidad"];
                     aux.Porcentaje = (decimal)datos.Lector["Porcentaje"];
+
                     lista.Add(aux);
                 }
                 return lista;

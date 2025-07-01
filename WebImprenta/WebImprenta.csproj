@@ -117,10 +117,8 @@
     <Content Include="Content\estilos-propios.css" />
     <Content Include="Content\fuentes-propias.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Paginas\PageEnvios.aspx" />
-    <Content Include="Paginas\PageMensajes.aspx" />
-    <Content Include="Paginas\PagePedidos.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Paginas\PageRecepcion.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -146,27 +144,6 @@
     <Compile Include="Default.Master.designer.cs">
       <DependentUpon>Default.Master</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\PageEnvios.aspx.cs">
-      <DependentUpon>PageEnvios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\PageEnvios.aspx.designer.cs">
-      <DependentUpon>PageEnvios.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\PageMensajes.aspx.cs">
-      <DependentUpon>PageMensajes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\PageMensajes.aspx.designer.cs">
-      <DependentUpon>PageMensajes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\PagePedidos.aspx.cs">
-      <DependentUpon>PagePedidos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\PagePedidos.aspx.designer.cs">
-      <DependentUpon>PagePedidos.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,6 +153,13 @@
     </Compile>
     <Compile Include="MasterOperador.Master.designer.cs">
       <DependentUpon>MasterOperador.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PageRecepcion.aspx.cs">
+      <DependentUpon>PageRecepcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageRecepcion.aspx.designer.cs">
+      <DependentUpon>PageRecepcion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pedidos.aspx.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>
@@ -233,6 +217,9 @@
       <Project>{a7cb079e-70c8-47dd-9cb6-f6257a9daf69}</Project>
       <Name>Negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,5 +1,5 @@
-﻿@import url('fuentes.css');
-
+﻿
+@import url('fuentes.css');
 
 :root {
     --casiBlanco: #eaeded;
@@ -8,6 +8,7 @@
     --azulCasiOscuro: #2e4053;
     --celeste: #2980b9;
     --fuxia: #b03177;
+    --verdeAgua: #17e79b;
 }
 
 body {
@@ -40,16 +41,41 @@ td {
 /*.medio:nth-child(2){ background-color:yellow; }*/
 
 #menu-usuario {
-    width: 100vw;
     display: flex;
+    justify-content: space-between;
     background-color: black;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
 }
 
+/*---------- nuevo ----------*/
 #menu li {
     list-style: none;
     display: inline;
     margin-left: 2em;
 }
+
+#icono-logout {
+    width: 2em;
+    align-self: center;
+}
+
+#TextoModal {
+    visibility: hidden;
+}
+
+#ContenedorMensajes {
+    display: flow;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/*---------- fin nuevo ----------*/
+
+
 
 .adv-numerica {
     display: inline flex;
@@ -64,34 +90,6 @@ td {
     /* display:none; */
 }
 
-.Secciones:nth-child(2) {
-    margin-top: 3em;
-}
-
-.Secciones {
-    display: flex;
-    flex-basis: 80%;
-    padding-top: 3em;
-}
-/*
-#contenedor-grilla {
-    padding: 4em 0 0 4em;
-}
-*/
-#ventana-modal {
-    position: fixed;
-    top: 20%;
-    left: 17%;
-    width: 30%;
-    padding: 4em;
-    background-color: var(--azulCasiOscuro);
-    box-shadow: 0 0 20px var(--fuxia);
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    font: 1em Roboto Slab;
-    border-radius: 5px;
-}
 /*----------------------*/
 #sec-titular {
     margin-top: 5%; /*Quitar esto*/
@@ -130,3 +128,27 @@ td {
 }
 
 /*----------------------*/
+.Secciones:nth-child(2) {
+    margin-top: 3em;
+}
+
+.Secciones {
+    display: flex;
+    flex-basis: 80%;
+    padding-top: 3em;
+}
+
+#ventana-modal {
+    position: fixed;
+    top: 20%;
+    left: 17%;
+    width: 30%;
+    padding: 4em;
+    background-color: var(--azulCasiOscuro);
+    box-shadow: 0 0 20px var(--fuxia);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    font: 1em Roboto Slab;
+    border-radius: 5px;
+}

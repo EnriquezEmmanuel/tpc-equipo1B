@@ -18,37 +18,24 @@ namespace Negocio
             try
             {
 
-                datos.setearConsulta("SELECT P.IdPedido, P.Fecha, U.Email, '('+H.Tamaño +', '+ H.TipoPapel+')' as 'Hoja', CAST(H.Precio AS char) as ValorHoja, C.Color, C.Calidad, CAST(C.Porcentaje AS char) as ValorImpresión, P.CopiaPorHoja, CASE WHEN P.Margenes=1 THEN 'Si' ELSE 'No' END AS Margen, P.Copias, E.Descripcion as Estado FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN Hoja H ON P.IdHoja = H.Id JOIN Calidad C ON P.IdCalidad = C.Id JOIN Estado E ON P.IdEstado = E.Id");
-                //datos.setearConsulta("SELECT  P.IdPedido AS Id, H.Tamaño FROM Pedido P JOIN Hoja H ON P.IdHoja = H.Id");
+                datos.setearConsulta("SELECT P.IdPedido, UD.Nombre, U.Email, P.Fecha, P.IdHoja, P.IdCalidad, P.CopiaPorHoja, P.Margenes, P.Copias, E.Descripcion AS Estado FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN Estado E ON P.IdEstado = E.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Pedido aux = new Pedido();
-                    aux.IdPedido = (int)datos.Lector["IdPedido"] ;
+                    aux.IdPedido = (int)datos.Lector["IdPedido"];
+                    aux.NombreUsuario = (string)datos.Lector["Nombre"];
                     aux.Email = (string)datos.Lector["Email"];
-                    ////aux.Tamaño = (string)datos.Lector["Tamaño"];
-                    //aux.Calidad = (int)datos.Lector["IdCalidad"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
-                    aux.Hoja = (string)datos.Lector["Hoja"];
-                    //aux.ValorHoja = (decimal)datos.Lector["ValorHoja"];
-                    aux.Color = (string)datos.Lector["Color"];
-                    aux.Calidad = (string)datos.Lector["Calidad"];
-                    //aux.ValorImpresion = (decimal)datos.Lector["ValorImpresión"];
+
+                    aux.IdHoja = (int)datos.Lector["IdHoja"];
+                    aux.IdCalidad = (int)datos.Lector["IdCalidad"];
                     aux.CopiaPorHoja = (int)datos.Lector["CopiaPorHoja"];
-                    aux.Margenes = (string)datos.Lector["Margen"];
+                    aux.Margenes = (bool)datos.Lector["Margenes"];
                     aux.Copias = (int)datos.Lector["Copias"];
                     aux.Estado = (string)datos.Lector["Estado"];
 
-
-                    //aux.Id = (int)datos.Lector["Id"];
-                    //aux.Codigo = (string)datos.Lector["Codigo"];
-
-                    ////Info Marca
-                    //aux.Marca = new Marca();
-                    //aux.Marca.Descripcion = (string)datos.Lector["MarcaDescripcion"];
-
-                    //Info Catagoria                    
                     lista.Add(aux);
                 }
 
@@ -65,7 +52,7 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("UPDATE Pedido SET IdEstado = (SELECT Id FROM Estado WHERE Descripcion = @estado) WHERE IdPedido = @id");
-                datos.setearParametro("@id", id); 
+                datos.setearParametro("@id", id);
                 datos.setearParametro("@estado", estado);
                 datos.ejecutarAccion();
             }
