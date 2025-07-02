@@ -20,7 +20,7 @@ namespace Negocio
             try
             {
 
-                datos.setearConsulta("SELECT P.IdPedido, UD.Nombre, U.Email, P.Fecha, P.IdHoja, P.IdCalidad, P.CopiaPorHoja, P.Margenes, P.Copias, E.Descripcion AS Estado FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN Estado E ON P.IdEstado = E.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos");
+                datos.setearConsulta("SELECT P.IdPedido, UD.Nombre, U.Email, P.Fecha, P.IdHoja, P.IdCalidad, P.CopiaPorHoja, P.Margenes, P.Copias, E.Descripcion AS Estado, F.Precio AS PrecioPedido FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN Estado E ON P.IdEstado = E.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos JOIN Factura F ON F.IdPedido=P.IdPedido");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -47,6 +47,7 @@ namespace Negocio
                     aux.Copias = (int)datos.Lector["Copias"];
 
                     aux.Estado = (string)datos.Lector["Estado"];// ahora lo corrijo
+                    aux.PrecioPedido = (decimal)datos.Lector["PrecioPedido"];
 
                     lista.Add(aux);
                 }

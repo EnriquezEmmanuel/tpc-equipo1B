@@ -132,6 +132,15 @@ namespace WebImprenta.Paginas
         protected global::System.Web.UI.WebControls.Label lblMargen;
 
         /// <summary>
+        /// Control lblPreciPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPreciPedido;
+
+        /// <summary>
         /// Control ContenedorMensajes.
         /// </summary>
         /// <remarks>

@@ -35,7 +35,7 @@ namespace WebImprenta
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "recalcular", "setTimeout(calcularSubtotal, 100);", true); 
             }
-            
+            DevolverModal();
         }
         private void cargarSeleccionables()
         {
@@ -521,9 +521,10 @@ namespace WebImprenta
                             "<div class=\"cuarto\"><h3>Hoja</h3><ul><li class=\"margen-bottom-0em3\">Tamaño: " + item.Hoja.Tamaño + "</li><li class=\"margen-bottom-0em3\">Tipo:" + item.Hoja.TipoPapel + "</li><li class=\"margen-bottom-0em3\">Gramaje: " + item.Hoja.Gramaje + "</li></ul></div>" +
                             "<div class=\"cuarto\"><h3>Calidad</h3><ul><li class=\"margen-bottom-0em3\">" + item.Calidad.Color + "</li><li class=\"margen-bottom-0em3\">" + item.Calidad.Tipo + "</li><li class=\"margen-bottom-0em3\">Simple</li></ul></div>" +
                             "<div class=\"cuarto\"><h3>Detalles de impresión</h3><ul><li class=\"margen-bottom-0em3\">Copias por hoja: " + item.CopiaPorHoja.ToString() + "</li><li class=\"margen-bottom-0em3\">Cantidad de copias: " + item.Copias.ToString() + "</li><li class=\"margen-bottom-0em3\">Margen (2mm): " + margenes + "</li></ul></div>" +
-                            "<div class=\"cuarto contenedor-v alineacion-inicio-centrado\"><h3>Precio</h3><p>$1400</p><h3>Envío</h3><p>$1000</p></div>" +
+                            "<div class=\"cuarto contenedor-v alineacion-inicio-centrado\"><h3>Precio</h3><p"+ item.PrecioPedido.ToString() +"</p><h3>Envío</h3><p>$1000</p></div>" +
                             "</div>";
                     }
+                    //txtValidacion.Text = ListaPedidos[2].PrecioPedido.ToString();
                 }
                 else {
                     MjeError("El usuario o la contraseña son incorrectos.");

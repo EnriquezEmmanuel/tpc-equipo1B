@@ -66,7 +66,10 @@
 			</div>
 			<div class="cuarto contenedor-v alineacion-inicio-centrado">
 				<h3>Precio</h3>
-				<ul><li>$1400</li></ul>
+				<ul><li>
+						<asp:Label ID="lblPreciPedido" Text="" runat="server" />
+					</li>
+				</ul>
 				<h3>Envío</h3>
 				<ul><li>$1000</li></ul>
 			</div>

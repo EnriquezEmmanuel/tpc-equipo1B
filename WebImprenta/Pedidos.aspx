@@ -497,7 +497,7 @@
 
                                 <asp:Button ID="btnValidar" runat="server" Text="Validar" OnClick="btnValidar_Click" CausesValidation="false"/>
 
-                                <%--<asp:Label Text="1234" runat="server" ID="txtValidacionEmail"/>--%>
+                                <%--<asp:Label Text="1234" runat="server" ID="txtValidacion"/>--%>
 
 
                                 <div class="tablon-claro" runat="server" id="ContenedorPedidos">

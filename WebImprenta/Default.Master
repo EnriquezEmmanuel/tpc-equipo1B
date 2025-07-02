@@ -21,10 +21,9 @@
 		        <div id="menu">
 			        <ul>
 				        <li><a href="">Inicio</a></li>
-				        <li><a href="">Login</a></li>
+				        <li><a href="Paginas/PageSession.aspx">Login</a></li>
 				        <li><a href="<%= ResolveUrl("~/Pedidos.aspx") %>">Pedidos<div class="adv-numerica alineacion-centrado-centrado">3</div></a></li>
 				        <li><a href="">Catalogo de productos</a></li>
-				        <li><a href="">Envios</a></li>
 			        </ul>
 		        </div>
 	        </section>

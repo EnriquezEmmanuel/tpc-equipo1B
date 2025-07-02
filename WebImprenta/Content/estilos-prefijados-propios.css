@@ -216,12 +216,15 @@
     justify-content: flex-end;
     align-items: flex-end;
 }
-
 .alineacion-between-center {
     justify-content: space-between;
     align-items: center;
 }
 
+.alineacion-center-between {
+    justify-content: center;
+    align-items: flex-between;
+}
 
 /*----------- FORMULARIOS ---------------*/
 
@@ -362,6 +365,19 @@ li {
     font-family: Roboto Slab;
 }
 
+
+.txt-em3 {
+    font-size: .3em;
+}
+
+.txt-em6 {
+    font-size: .6em;
+}
+
+.txt-em9 {
+    font-size: .9em;
+}
+
 .txt-1em {
     font-size: 1em;
 }
@@ -381,6 +397,7 @@ li {
 .txt-2em5 {
     font-size: 2.5em;
 }
+
 
 .txt-color-blanco-1 {
     color: white;
