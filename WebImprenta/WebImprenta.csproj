@@ -119,6 +119,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Paginas\PageRecepcion.aspx" />
+    <Content Include="Paginas\PageRegistry.aspx" />
     <Content Include="Paginas\PageSession.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -161,6 +162,13 @@
     </Compile>
     <Compile Include="Paginas\PageRecepcion.aspx.designer.cs">
       <DependentUpon>PageRecepcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PageRegistry.aspx.cs">
+      <DependentUpon>PageRegistry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageRegistry.aspx.designer.cs">
+      <DependentUpon>PageRegistry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\PageSession.aspx.cs">
       <DependentUpon>PageSession.aspx</DependentUpon>
