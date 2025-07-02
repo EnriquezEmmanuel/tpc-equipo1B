@@ -171,7 +171,7 @@ namespace WebImprenta.Paginas
 
                 if (!(ddlListaEstados.SelectedValue is null))
                 {
-    //////////////////////hay un error acá
+    //////////////////////revisar/////////////////////////////
                     PNegocio.ModificarEstado(PedidoSeleccionado.IdPedido, ddlListaEstados.SelectedValue);
                     Response.Redirect(Request.RawUrl);
                 }

@@ -13,11 +13,13 @@ using System.Drawing;
 using System.Net;
 using System.Text.RegularExpressions;
 
+using Dominio;
 using Negocio;
 namespace WebImprenta
 {
     public partial class Pedidos : System.Web.UI.Page
     {
+        public List<Usuario> ListaUsuarios {get;set;}
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -486,6 +488,67 @@ namespace WebImprenta
             catch
             { 
             }
+        }
+
+        protected void btnValidar_Click(object sender, EventArgs e)
+        {
+           
+            UsuarioNegocio uNegocio = new UsuarioNegocio();
+            PedidoNegocio pNegocio = new PedidoNegocio();            
+            List<Pedido> ListaPedidos=new List<Pedido>();
+            try
+            {
+                //if (uNegocio.Loguear(tbEmail.Text, tbPass.Text))
+                //    txtValidacionEmail.Text = "Válido";
+                //else txtValidacionEmail.Text = "Inválido";
+
+                if (uNegocio.Loguear(tbEmail.Text, tbPass.Text))
+                {
+                    ListaPedidos = pNegocio.BuscarPedidos(tbEmail.Text);
+                    //txtValidacionEmail.Text = ListaPedidos[0].IdPedido.ToString();
+
+
+                    // validar si está vacía la lista
+
+
+                    ContenedorPedidos.InnerHtml = "";
+                    string margenes = "";
+                    foreach (var item in ListaPedidos)
+                    {
+                        if (item.Margenes) margenes = "Si"; else margenes = "No";
+                        ContenedorPedidos.InnerHtml += "<div class=\"tablon-claro\">" +
+                            "<h2 class=\"txt-familia-Rto txt-bold txt-1em3 entero\">Pedido #<span id=\"txt-numero-pedido\">" + item.IdPedido.ToString() + "</span>	|	<span>" + item.NombreUsuario + "</span>	|	<span id=\"txt-estado-pedido\" class=\"txt-normal txt-familia-Rto-Slab\">" + item.Estado + "</span></h2>" +
+                            "<div class=\"cuarto\"><h3>Hoja</h3><ul><li class=\"margen-bottom-0em3\">Tamaño: " + item.Hoja.Tamaño + "</li><li class=\"margen-bottom-0em3\">Tipo:" + item.Hoja.TipoPapel + "</li><li class=\"margen-bottom-0em3\">Gramaje: " + item.Hoja.Gramaje + "</li></ul></div>" +
+                            "<div class=\"cuarto\"><h3>Calidad</h3><ul><li class=\"margen-bottom-0em3\">" + item.Calidad.Color + "</li><li class=\"margen-bottom-0em3\">" + item.Calidad.Tipo + "</li><li class=\"margen-bottom-0em3\">Simple</li></ul></div>" +
+                            "<div class=\"cuarto\"><h3>Detalles de impresión</h3><ul><li class=\"margen-bottom-0em3\">Copias por hoja: " + item.CopiaPorHoja.ToString() + "</li><li class=\"margen-bottom-0em3\">Cantidad de copias: " + item.Copias.ToString() + "</li><li class=\"margen-bottom-0em3\">Margen (2mm): " + margenes + "</li></ul></div>" +
+                            "<div class=\"cuarto contenedor-v alineacion-inicio-centrado\"><h3>Precio</h3><p>$1400</p><h3>Envío</h3><p>$1000</p></div>" +
+                            "</div>";
+                    }
+                }
+                else {
+                    MjeError("El usuario o la contraseña son incorrectos.");
+                }
+            }
+            catch (Exception ex)
+            { MjeError("Hubo un error en la carga de la página. Intentelo más tarde. Error:"+ ex.ToString()); }
+
+        }
+        protected void MjeError(string mje)
+        {
+            limpiarModal();
+            TextoModal.Text = mje;
+        }
+        protected void limpiarModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:flex;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
+            //btnAceptarModal.Style["display"] = "none";
+        }
+        protected void DevolverModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:none;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "devolver", script, true);
+            //btnAceptarModal.Style["display"] = "flex";
         }
     }
 }

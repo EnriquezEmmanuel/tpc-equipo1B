@@ -33,7 +33,7 @@ namespace Negocio
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
 
                     HojaNegocio hNegocio = new HojaNegocio();
-                    ListaHojas = hNegocio.lista(); 
+                    ListaHojas = hNegocio.lista();
                     aux.Hoja = new Hoja();
                     aux.Hoja = ListaHojas.Find(x => x.Id == (int)datos.Lector["IdHoja"]);
 
@@ -73,6 +73,53 @@ namespace Negocio
             finally
             { datos.cerrarConexion(); }
 
+        }
+        public List<Pedido> BuscarPedidos(string Email)
+        {
+            List<Pedido> lista = new List<Pedido>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+
+                datos.setearConsulta("SELECT P.IdPedido, UD.Nombre, U.Email, P.Fecha, P.IdHoja, P.IdCalidad, P.CopiaPorHoja, P.Margenes, P.Copias, E.Descripcion AS Estado FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN Estado E ON P.IdEstado = E.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos WHERE U.Email=@Email");
+                datos.setearParametro("@Email", Email);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Pedido aux = new Pedido();
+
+                    aux.IdPedido = (int)datos.Lector["IdPedido"];
+                    aux.NombreUsuario = (string)datos.Lector["Nombre"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Fecha = (DateTime)datos.Lector["Fecha"];
+
+                    HojaNegocio hNegocio = new HojaNegocio();
+                    ListaHojas = hNegocio.lista();
+                    aux.Hoja = new Hoja();
+                    aux.Hoja = ListaHojas.Find(x => x.Id == (int)datos.Lector["IdHoja"]);
+
+                    CalidadNegocio cNegocio = new CalidadNegocio();
+                    ListaCalidad = cNegocio.lista();
+                    aux.Calidad = new Calidad();
+                    aux.Calidad = ListaCalidad.Find(x => x.Id == (int)datos.Lector["IdCalidad"]);
+
+                    aux.CopiaPorHoja = (int)datos.Lector["CopiaPorHoja"];
+                    aux.Margenes = (bool)datos.Lector["Margenes"];
+                    aux.Copias = (int)datos.Lector["Copias"];
+
+                    aux.Estado = (string)datos.Lector["Estado"];// ahora lo corrijo
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            { throw ex; }
+            finally
+            { datos.cerrarConexion(); }
         }
     }
 }

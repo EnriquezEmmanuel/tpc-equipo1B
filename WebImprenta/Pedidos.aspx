@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Pedidos.aspx.cs" Inherits="WebImprenta.Pedidos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
+    <script type="text/javascript" src="../Scripts/CompotamientoGenerico.js"></script>
     <style>
         .ms-offset-6-5 {
             margin-left: 52%;
@@ -254,12 +254,15 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+ 
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:HiddenField ID="hdnRutaArchivoTemporal" runat="server" EnableViewState="true" />
     <asp:HiddenField ID="HiddenField1" runat="server" EnableViewState="true" />
     <asp:HiddenField ID="hdnUrlImagenSubida" runat="server" />
     <asp:HiddenField ID="hdnSubtotal" runat="server" />
     <asp:HiddenField ID="hdnPaginas" runat="server" />
+
+   
 
     <div class="accordion" id="accordionPedidos">
         <div class="accordion-item border-0">
@@ -480,10 +483,43 @@
                 <div class="accordion-body">
                     <div class="container">
                         <%-- lista de pedidos --%>
+
+                        <asp:UpdatePanel ID="updPanelPedidosRealizados" runat="server">
+
+                            <ContentTemplate>
+
+        <!----------------- Esto es temporal hasta que tengamos los usuarios ----------------->
+    
+                                <asp:Label Text="Usuario" runat="server" />
+                                <asp:TextBox ID="tbEmail" runat="server"></asp:TextBox>
+                                <asp:Label Text="Clave" runat="server" />
+                                <asp:TextBox ID="tbPass" runat="server" TextMode="Password" />
+
+                                <asp:Button ID="btnValidar" runat="server" Text="Validar" OnClick="btnValidar_Click" CausesValidation="false"/>
+
+                                <%--<asp:Label Text="1234" runat="server" ID="txtValidacionEmail"/>--%>
+
+
+                                <div class="tablon-claro" runat="server" id="ContenedorPedidos">
+			                    
+                                </div>
+         <!----------------------------------------------------------------------------------->
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <section id="ventana-modal">		
+		<asp:Label ID="TextoModal" runat="server" Text="Esto es un texto modal:"></asp:Label><br />
+
+		<div class="contenedor-h alineacion-centrado-final">
+			<%--<asp:Button ID="btnAceptarModal" OnClick="btnAceptarModal_Click" class="boton-formulario" runat="server" Text="Modificar" />--%>
+			<button class="boton-formulario" id="btn-cerrar-modal">Cerrar</button>  <!--Cancelar</button>-->
+		</div>
+	</section>
 
 </asp:Content>

@@ -146,7 +146,7 @@ td {
     padding: 4em;
     background-color: var(--azulCasiOscuro);
     box-shadow: 0 0 20px var(--fuxia);
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     font: 1em Roboto Slab;
