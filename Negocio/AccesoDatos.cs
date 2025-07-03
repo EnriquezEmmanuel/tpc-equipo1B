@@ -22,7 +22,7 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=BD_IMPRENTA_04; Integrated Security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS01; database=BD_IMPRENTA_03; Integrated Security=true");
             comando = new SqlCommand();
         }
         public void setearConsulta(string consulta)
@@ -30,6 +30,13 @@ namespace Negocio
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
+        public void setearProcedimiento(string sp)
+        {
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.CommandText = sp;
+
+        }
+
         public void ejecutarLectura()
         {
             comando.Connection = conexion;
@@ -71,6 +78,20 @@ namespace Negocio
                 lector.Close();
             }
             conexion.Close();
+        }
+        public int ejecutarAccionScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return int.Parse(comando.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

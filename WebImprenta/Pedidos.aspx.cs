@@ -22,6 +22,12 @@ namespace WebImprenta
         public List<Usuario> ListaUsuarios {get;set;}
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
             if (!IsPostBack)
             {
                 cargarSeleccionables();
@@ -496,13 +502,16 @@ namespace WebImprenta
             UsuarioNegocio uNegocio = new UsuarioNegocio();
             PedidoNegocio pNegocio = new PedidoNegocio();            
             List<Pedido> ListaPedidos=new List<Pedido>();
+            Usuario usuario = new Usuario();
+            usuario.Email = tbEmail.Text;
+            usuario.Pass = tbPass.Text;
             try
             {
                 //if (uNegocio.Loguear(tbEmail.Text, tbPass.Text))
                 //    txtValidacionEmail.Text = "Válido";
                 //else txtValidacionEmail.Text = "Inválido";
 
-                if (uNegocio.Loguear(tbEmail.Text, tbPass.Text))
+                if (uNegocio.Loguear(usuario))
                 {
                     ListaPedidos = pNegocio.BuscarPedidos(tbEmail.Text);
                     //txtValidacionEmail.Text = ListaPedidos[0].IdPedido.ToString();

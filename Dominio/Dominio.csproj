@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calidad.cs" />
+    <Compile Include="DatosUsuario.cs" />
+    <Compile Include="Direccion.cs" />
     <Compile Include="EstadoPedido.cs" />
     <Compile Include="Hoja.cs" />
     <Compile Include="Mensajes.cs" />

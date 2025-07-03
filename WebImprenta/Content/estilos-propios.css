@@ -1,5 +1,5 @@
 ﻿
-@import url('fuentes.css');
+/*@import url('fuentes.css');
 
 :root {
     --casiBlanco: #eaeded;
@@ -28,8 +28,164 @@ a {
 }
 
 form {
-    width: 100%;
+    width: 100%;*/
+    /*display: flex;*/
+    /*flex-wrap: wrap;
+}
+
+td {
+    text-align: right;
+}*/
+
+
+/*.medio:nth-child(2){ background-color:yellow; }*/
+
+/*#menu-usuario {
     display: flex;
+    justify-content: space-between;
+    background-color: black;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}*/
+
+/*---------- nuevo ----------*/
+/*#menu li {
+    list-style: none;
+    display: inline;
+    margin-left: 2em;
+}
+
+#icono-logout {
+    width: 2em;
+    align-self: center;
+}
+
+#TextoModal {
+    visibility: hidden;
+}
+
+#ContenedorMensajes {
+    display: flow;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}*/
+
+/*---------- fin nuevo ----------*/
+
+
+
+/*.adv-numerica {
+    display: inline flex;
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+    font: .8em Roboto;
+    color: white;
+    background-color: var(--fuxia);
+    border-radius: 10px;
+    z-index: 15;*/
+    /* display:none; */
+/*}*/
+
+/*----------------------*/
+/*#sec-titular {
+    margin-top: 5%;*/ /*Quitar esto*/
+    /*height: 70vh;
+    font-family: Roboto Slab;
+    font-weight: 100;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+    #sec-titular::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://www.onlineprinters.es/blog/wp-content/uploads/2022/07/Imagebroschure_Impressed.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        opacity: 0.5;
+        z-index: -1;
+    }
+
+    #sec-titular h1 {
+        font-size: 4.5em;
+        box-shadow: 0 20px 1px var(--celeste);
+    }
+
+#slogan {
+    margin: 3em 0 3em 0;
+    font: 2.4em Roboto Slab;
+    transform: skewX(-15deg);
+}*/
+
+/*----------------------*/
+/*.Secciones:nth-child(2) {
+    margin-top: 3em;
+}
+
+.Secciones {
+    display: flex;
+    flex-basis: 80%;
+    padding-top: 3em;
+}
+
+#ventana-modal {
+    position: fixed;
+    top: 20%;
+    left: 17%;
+    width: 30%;
+    padding: 4em;
+    background-color: var(--azulCasiOscuro);
+    box-shadow: 0 0 20px var(--fuxia);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    font: 1em Roboto Slab;
+    border-radius: 5px;
+}*/
+
+@import url('fuentes.css');
+
+:root {
+    --casiBlanco: #eaeded;
+    --blancoGastado: #95a5a6;
+    --azulOscuro: #283747;
+    --azulCasiOscuro: #2e4053;
+    --celeste: #2980b9;
+    --fuxia: #b03177;
+    --verdeAgua: #17e79b;
+}
+
+/* BODY - Versión corregida unificada */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Roboto;
+    background-color: var(--azulOscuro);
+    color: var(--casiBlanco);
+    justify-content: flex-start; /* Cambiado de space-around a flex-start */
+    padding-top: 60px; /* Espacio para el menú fijo */
+}
+
+a {
+    text-decoration: none;
+    font-family: Roboto;
+    color: var(--celeste);
+    font-size: 1.2em;
+}
+
+form {
+    width: 100%;
     flex-wrap: wrap;
 }
 
@@ -37,9 +193,7 @@ td {
     text-align: right;
 }
 
-
-/*.medio:nth-child(2){ background-color:yellow; }*/
-
+/* MENÚ USUARIO - Versión corregida unificada */
 #menu-usuario {
     display: flex;
     justify-content: space-between;
@@ -49,6 +203,9 @@ td {
     top: 0;
     left: 0;
     z-index: 10;
+    height: 60px; /* Definir altura específica */
+    padding: 0 20px;
+    align-items: center;
 }
 
 /*---------- nuevo ----------*/
@@ -72,13 +229,10 @@ td {
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
 /*---------- fin nuevo ----------*/
 
-
-
 .adv-numerica {
-    display: inline flex;
+    display: inline-flex; /* Corregido: era "inline flex" */
     width: 20px;
     height: 20px;
     margin-left: 2px;
@@ -87,7 +241,31 @@ td {
     background-color: var(--fuxia);
     border-radius: 10px;
     z-index: 15;
-    /* display:none; */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor principal para páginas */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px);
+}
+
+/* Específico para la página de login */
+.login-container-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 20px;
+}
+
+/* Asegurar que el formulario no se vea afectado por el CSS global */
+.login-box form {
+    width: 100%;
+    display: block; /* Sobrescribir cualquier flex */
 }
 
 /*----------------------*/
