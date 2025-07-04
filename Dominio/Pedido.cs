@@ -20,6 +20,7 @@ namespace Dominio
         public bool Margenes { get; set; }
         public int Copias { get; set; }
         public string Estado { get; set; }
+        public decimal PrecioPedido { get; set; }
 
     }
 }

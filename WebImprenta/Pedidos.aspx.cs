@@ -13,17 +13,34 @@ using System.Drawing;
 using System.Net;
 using System.Text.RegularExpressions;
 
+using Dominio;
 using Negocio;
 namespace WebImprenta
 {
     public partial class Pedidos : System.Web.UI.Page
     {
+        public List<Usuario> ListaUsuarios {get;set;}
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
             if (!IsPostBack)
             {
+                Usuario usuario = (Usuario)Session["usuario"];
+
+                if (usuario == null)
+                {
+                    // Por seguridad, regresamos al login
+                    Response.Redirect("Login.aspx", false);
+                    return;
+                }
                 cargarSeleccionables();
                 LimpiarArchivosTemporales();
+                CargarPedidos();
 
                 txtNumeroCopias.Attributes["type"] = "number";
                 txtNumeroCopias.Attributes["min"] = "1";
@@ -33,7 +50,7 @@ namespace WebImprenta
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "recalcular", "setTimeout(calcularSubtotal, 100);", true); 
             }
-            
+            DevolverModal();
         }
         private void cargarSeleccionables()
         {
@@ -486,6 +503,56 @@ namespace WebImprenta
             catch
             { 
             }
+        }
+
+        private void CargarPedidos()
+        {
+            PedidoNegocio pNegocio = new PedidoNegocio();
+            List<Pedido> ListaPedidos = new List<Pedido>();
+
+            Usuario usuario = (Usuario)Session["usuario"];
+
+            try
+            {
+                ListaPedidos = pNegocio.BuscarPedidos(usuario.Email);
+
+                ContenedorPedidos.InnerHtml = "";
+                string margenes = "";
+
+                foreach (var item in ListaPedidos)
+                {
+                    margenes = item.Margenes ? "Sí" : "No";
+
+                    ContenedorPedidos.InnerHtml += "<div class=\"tablon-claro\">" +
+                        "<h2 class=\"txt-familia-Rto txt-bold txt-1em3 entero\">Pedido #<span id=\"txt-numero-pedido\">" + item.IdPedido + "</span> | <span>"/* + item.NombreUsuario*/ + "</span> | <span id=\"txt-estado-pedido\" class=\"txt-normal txt-familia-Rto-Slab\">" + item.Estado + "</span></h2>" +
+                        "<div class=\"cuarto\"><h3>Hoja</h3><ul><li>Tamaño: " + item.Hoja.Tamaño + "</li><li>Tipo: " + item.Hoja.TipoPapel + "</li><li>Gramaje: " + item.Hoja.Gramaje + "</li></ul></div>" +
+                        "<div class=\"cuarto\"><h3>Calidad</h3><ul><li>" + item.Calidad.Color + "</li><li>" + item.Calidad.Tipo + "</li><li>Simple</li></ul></div>" +
+                        "<div class=\"cuarto\"><h3>Detalles</h3><ul><li>Copias por hoja: " + item.CopiaPorHoja + "</li><li>Cantidad: " + item.Copias + "</li><li>Margen (2mm): " + margenes + "</li></ul></div>" +
+                        "<div class=\"cuarto contenedor-v alineacion-inicio-centrado\"><h3>Precio</h3><p>$" + item.PrecioPedido + "</p><h3>Envío</h3><p>$1000</p></div>" +
+                        "</div>";
+                }
+            }
+            catch (Exception ex)
+            {
+                MjeError("Hubo un error al cargar los pedidos. Intentelo más tarde.<br>Error: " + ex.Message);
+            }
+        }
+        protected void MjeError(string mje)
+        {
+            limpiarModal();
+            TextoModal.Text = mje;
+        }
+        protected void limpiarModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:flex;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
+            //btnAceptarModal.Style["display"] = "none";
+        }
+        protected void DevolverModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:none;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "devolver", script, true);
+            //btnAceptarModal.Style["display"] = "flex";
         }
     }
 }

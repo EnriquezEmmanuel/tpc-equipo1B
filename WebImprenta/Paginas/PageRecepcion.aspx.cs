@@ -25,6 +25,7 @@ namespace WebImprenta.Paginas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            DevolverModal();
             try
             {
                 PedidoNegocio pNegocio = new PedidoNegocio();
@@ -73,8 +74,8 @@ namespace WebImprenta.Paginas
                 }
 
             }
-            catch (Exception)
-            { MjeError("Hubo un error en la carga de la página. Intentelo más tarde"); }
+            catch (Exception ex)
+            { MjeError("Hubo un error en la carga de la página. Intentelo más tarde" + ex.ToString()); }
         }
         protected void MjeError(string mje)
         {
@@ -123,6 +124,7 @@ namespace WebImprenta.Paginas
                     lblMargen.Text = "Si";
                 else
                     lblMargen.Text = "No";
+                lblPreciPedido.Text = PedidoSeleccionado.PrecioPedido.ToString();
 
                 MensajesNegocio mNegocio = new MensajesNegocio();
                 ListaMensajes = mNegocio.listar();
@@ -171,7 +173,7 @@ namespace WebImprenta.Paginas
 
                 if (!(ddlListaEstados.SelectedValue is null))
                 {
-    //////////////////////hay un error acá
+    //////////////////////revisar/////////////////////////////
                     PNegocio.ModificarEstado(PedidoSeleccionado.IdPedido, ddlListaEstados.SelectedValue);
                     Response.Redirect(Request.RawUrl);
                 }
