@@ -15,7 +15,7 @@ namespace WebImprenta
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] == null)
+            if (Session["Usuario"] == null)
             {
                 Session.Add("error", "Necesitas loguearte.");
                 Response.Redirect("Error.aspx", false);
@@ -38,7 +38,7 @@ namespace WebImprenta
                         //MercadoPago.SDK.AccessToken = "...";
                     }
 
-                    Usuario usuario = (Usuario)Session["usuario"];
+                    Usuario usuario = (Usuario)Session["Usuario"];
 
                     if (usuario == null)
                     {
@@ -53,7 +53,7 @@ namespace WebImprenta
                     usuario.Direcciones = direcciones ?? new List<Direccion>();
 
                     // Volvemos a guardar el objeto actualizado en la sesión
-                    Session["usuario"] = usuario;
+                    Session["Usuario"] = usuario;
 
                     rptDirecciones.DataSource = usuario.Direcciones;
                     rptDirecciones.DataBind();
@@ -118,7 +118,7 @@ namespace WebImprenta
             {
                 int idDireccion = int.Parse(e.CommandArgument.ToString());
 
-                Usuario usuario = (Usuario)Session["usuario"];
+                Usuario usuario = (Usuario)Session["Usuario"];
                 if (usuario == null)
                 {
                     txtError.Text = "Usuario no encontrado.";

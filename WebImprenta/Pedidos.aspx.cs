@@ -19,7 +19,7 @@ namespace WebImprenta
 {
     public partial class Pedidos : System.Web.UI.Page
     {
-        public List<Usuario> ListaUsuarios {get;set;}
+        public List<Usuario> ListaUsuarios { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
@@ -46,9 +46,9 @@ namespace WebImprenta
                 txtNumeroCopias.Attributes["min"] = "1";
                 txtNumeroCopias.Attributes["step"] = "1";
             }
-            else 
+            else
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "recalcular", "setTimeout(calcularSubtotal, 100);", true); 
+                ScriptManager.RegisterStartupScript(this, GetType(), "recalcular", "setTimeout(calcularSubtotal, 100);", true);
             }
             DevolverModal();
         }
@@ -177,7 +177,7 @@ namespace WebImprenta
                 bool esArchivoDesdeDispositivo = fileUpload.HasFile;
                 bool esEnlace = !string.IsNullOrEmpty(enlaceOriginal) && !esArchivoDesdeDispositivo;
 
-                if (esEnlace && !esImagen) 
+                if (esEnlace && !esImagen)
                 {
                     if (Uri.IsWellFormedUriString(enlaceOriginal, UriKind.Absolute))
                     {
@@ -228,7 +228,7 @@ namespace WebImprenta
                 Session["Calidad"] = ddlCalidad.SelectedValue;
                 Session["DobleCara"] = ddlDobleCara.SelectedValue;
 
-  
+
                 string copiasPorHoja = Request.Form["inputCopiasPorHoja"];
                 string numeroCopias = Request.Form["txtNumeroCopias"];
                 string margen = ddlMargen.SelectedValue;
@@ -266,7 +266,7 @@ namespace WebImprenta
             {
                 lblMensajeArchivo.Text = mensaje;
                 lblPaginas.Text = "";
-                hdnRutaArchivoTemporal.Value = ""; 
+                hdnRutaArchivoTemporal.Value = "";
                 hdnUrlImagenSubida.Value = "";
                 return;
             }
@@ -285,7 +285,7 @@ namespace WebImprenta
 
             lblMensajeArchivo.Text = "Archivo cargado correctamente.";
             lblPaginas.Text = "Páginas detectadas: " + paginas;
-            hdnPaginas.Value = paginas.ToString(); 
+            hdnPaginas.Value = paginas.ToString();
 
             hdnRutaArchivoTemporal.Value = rutaArchivo;
 
@@ -477,7 +477,7 @@ namespace WebImprenta
             if (lower.Contains(".docx")) return ".docx";
             if (lower.Contains(".jpg") || lower.Contains(".jpeg")) return ".jpg";
             if (lower.Contains(".png")) return ".png";
-            if (lower.Contains("export?format=pdf")) return ".pdf"; 
+            if (lower.Contains("export?format=pdf")) return ".pdf";
             return ".tmp";
         }
         private void LimpiarArchivosTemporales()
@@ -496,12 +496,12 @@ namespace WebImprenta
                     }
                     catch
                     {
-                        
+
                     }
                 }
             }
             catch
-            { 
+            {
             }
         }
 

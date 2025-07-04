@@ -92,7 +92,7 @@ namespace Negocio
                     Pedido aux = new Pedido();
 
                     aux.IdPedido = (int)datos.Lector["IdPedido"];
-                    //aux.NombreUsuario = (string)datos.Lector["Nombre"];         comentado temporalmente hasta arreglar la base
+                    //aux.NombreUsuario = (string)datos.Lector["Nombre"];        temporal hasta arreglar la base
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
 

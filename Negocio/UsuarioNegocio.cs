@@ -73,7 +73,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select Id, TipoUsuario from Usuario where Email = @Email AND Pass = @Pass");
+                datos.setearConsulta("select Id, IdTipoUsuario from Usuario where Email = @Email AND Pass = @Pass");
                 datos.setearParametro("@Email", usuario.Email);
                 datos.setearParametro("@Pass", usuario.Pass);
 
@@ -84,7 +84,7 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     usuario.Id = Convert.ToInt32(datos.Lector["Id"]);
-                    int tipo = Convert.ToInt32(datos.Lector["TipoUsuario"]);
+                    int tipo = Convert.ToInt32(datos.Lector["IdTipoUsuario"]);
                     usuario.TipoUsuario = tipo == 2 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
                     return true;
                 }
