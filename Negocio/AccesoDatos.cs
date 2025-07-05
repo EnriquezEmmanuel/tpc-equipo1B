@@ -22,7 +22,7 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=BD_IMPRENTA_03; Integrated Security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS01; database=BD_IMPRENTA_04; Integrated Security=true");
             comando = new SqlCommand();
         }
         public void setearConsulta(string consulta)
