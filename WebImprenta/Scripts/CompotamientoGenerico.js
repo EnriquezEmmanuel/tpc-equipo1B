@@ -4,6 +4,7 @@ function inicio() {
 	Id('btn-abrir-modal').addEventListener('click', activarModal, false);
 	Id('btn-cerrar-modal').addEventListener('click', quitarModal, false);
 	Id('aceptar-modal').addEventListener('click', quitarModal, false);
+	
 }
 
 //-------------------------------------------------------------------

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 
 using Dominio;
 using Negocio;
+using System.Text.RegularExpressions;
+
 
 namespace WebImprenta.Paginas
 {
@@ -23,17 +25,40 @@ namespace WebImprenta.Paginas
                 //string script = "alert('¡Evento ejecutado correctamente!');";
                 //ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
 
-                UsuarioNegocio uNegocio = new UsuarioNegocio();
-                string nuevaClave = uNegocio.VerificarMail(tbxEmail.Text);
-                if (nuevaClave != null)
-                {
-                    //Enviar mail....
-                    MjeError("Se envió un mail con una contraseña temporal.");
+                string patron = @"^[a-z0-9._-]+@[a-z0-9_-]+(\.[a-z]{2,})+$";
 
+                bool esValido = Regex.IsMatch(tbxEmail.Text, patron, RegexOptions.IgnoreCase);
+
+                if (esValido)
+                {
+                    UsuarioNegocio uNegocio = new UsuarioNegocio();
+                    string nuevaClave = uNegocio.VerificarMail(tbxEmail.Text);
+                    if (nuevaClave != null)
+                    {
+                        string mensaje = "Nueva clave temporal: <strong>"+ nuevaClave;
+                        mensaje += "</strong>.<br>Recuerde cambiarla al ingresar.";
+                        ServicioEmail servicioEmail = new ServicioEmail();
+                        servicioEmail.ArmarCorreo(tbxEmail.Text, "Recuperacion de Clave", mensaje);
+                        try
+                        {
+                            servicioEmail.EnviarMail();
+                            MjeError("Se envió un mail con una contraseña temporal.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MjeError("Ocurrio un error al intentar enviar el E-mail: "+ ex.Message);
+                        }
+                        
+
+                    }
+                    else
+                    {
+                        MjeError("Email no registrado.");
+                    }
                 }
                 else
                 {
-                    MjeError("Email o Clave incorrecta.");
+                    MjeError("Formato inválido de e-mail.");
                 }
             }
             catch (Exception ex)
