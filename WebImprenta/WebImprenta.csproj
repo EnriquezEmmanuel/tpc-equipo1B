@@ -157,9 +157,11 @@
     <Content Include="Global.asax" />
     <Content Include="InicioSesion.aspx" />
     <Content Include="MiPerfil.aspx" />
+    <Content Include="Paginas\PagePay.aspx" />
     <Content Include="Paginas\PageRecepcion.aspx" />
     <Content Include="Paginas\PageRegistry.aspx" />
     <Content Include="Paginas\PageSession.aspx" />
+    <Content Include="Paginas\PageShipping.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="RecuperarContraseña.aspx" />
     <Content Include="Registro.aspx" />
@@ -249,6 +251,13 @@
     <Compile Include="MiPerfil.aspx.designer.cs">
       <DependentUpon>MiPerfil.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Paginas\PagePay.aspx.cs">
+      <DependentUpon>PagePay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PagePay.aspx.designer.cs">
+      <DependentUpon>PagePay.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\PageRecepcion.aspx.cs">
       <DependentUpon>PageRecepcion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -269,6 +278,13 @@
     </Compile>
     <Compile Include="Paginas\PageSession.aspx.designer.cs">
       <DependentUpon>PageSession.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PageShipping.aspx.cs">
+      <DependentUpon>PageShipping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageShipping.aspx.designer.cs">
+      <DependentUpon>PageShipping.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pedidos.aspx.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>

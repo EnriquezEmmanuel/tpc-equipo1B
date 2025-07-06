@@ -23,7 +23,7 @@ namespace Negocio
                     Mensajes aux = new Mensajes();
 
                     aux.Id = (int)datos.Lector["Id"];
-                    aux.IdPedido = (int)datos.Lector["IdPedido"];
+                    aux.IdPedido = (long)datos.Lector["IdPedido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.TipoUsuario = (string)datos.Lector["TipoUsuario"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
@@ -39,7 +39,7 @@ namespace Negocio
             }
             finally { datos.cerrarConexion(); }
         }
-        public void EnviarMensaje(int idPedido, int idUsuario, string mensaje)
+        public void EnviarMensaje(long idPedido, int idUsuario, string mensaje)
         {
             AccesoDatos datos = new AccesoDatos();
             try

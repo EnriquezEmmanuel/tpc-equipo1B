@@ -483,29 +483,9 @@
                 <div class="accordion-body">
                     <div class="container">
                         <%-- lista de pedidos --%>
-
-                        <asp:UpdatePanel ID="updPanelPedidosRealizados" runat="server">
-
-                            <ContentTemplate>
-
-        <!----------------- Esto es temporal hasta que tengamos los usuarios ----------------->
-    
-                                <asp:Label Text="Usuario" runat="server" />
-                                <asp:TextBox ID="tbEmail" runat="server"></asp:TextBox>
-                                <asp:Label Text="Clave" runat="server" />
-                                <asp:TextBox ID="tbPass" runat="server" TextMode="Password" />
-
-                                <asp:Button ID="btnValidar" runat="server" Text="Validar" OnClick="btnValidar_Click" CausesValidation="false"/>
-
-                                <%--<asp:Label Text="1234" runat="server" ID="txtValidacion"/>--%>
-
-
-                                <div class="tablon-claro" runat="server" id="ContenedorPedidos">
-			                    
-                                </div>
-         <!----------------------------------------------------------------------------------->
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                        
+                        <div class="tablon-claro" runat="server" id="ContenedorPedidos">
+			            </div>
 
                     </div>
                 </div>

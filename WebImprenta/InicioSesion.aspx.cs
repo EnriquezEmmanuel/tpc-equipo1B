@@ -32,6 +32,8 @@ namespace WebImprenta
                 {
                     //Session.Add("usuario", usuario);
                     Session["usuario"] = usuario;
+                    //Modificacón Emma temporal
+                    Session["Email"] = usuario.Email;
                     Response.Redirect("Default.aspx");
                 }
                 else

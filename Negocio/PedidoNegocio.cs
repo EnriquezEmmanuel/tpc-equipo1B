@@ -20,14 +20,14 @@ namespace Negocio
             try
             {
 
-                datos.setearConsulta("SELECT P.IdPedido, UD.Nombre, U.Email, P.Fecha, P.IdHoja, P.IdCalidad, P.CopiaPorHoja, P.Margenes, P.Copias, E.Descripcion AS Estado, F.Precio AS PrecioPedido FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN Estado E ON P.IdEstado = E.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos JOIN Factura F ON F.IdPedido=P.IdPedido");
+                datos.setearConsulta("SELECT P.IdPedido, UD.Nombre, U.Email, P.Fecha, P.IdHoja, P.IdCalidad, P.CopiaPorHoja, P.Margenes, P.Copias, E.Descripcion AS Estado, F.Precio AS PrecioPedido FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN EstadoPedido E ON P.IdEstado = E.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos JOIN Factura F ON F.IdPedido=P.IdPedido");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Pedido aux = new Pedido();
 
-                    aux.IdPedido = (int)datos.Lector["IdPedido"];
+                    aux.IdPedido = (long)datos.Lector["IdPedido"];
                     aux.NombreUsuario = (string)datos.Lector["Nombre"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
@@ -59,7 +59,7 @@ namespace Negocio
             finally
             { datos.cerrarConexion(); }
         }
-        public void ModificarEstado(int id, string estado)
+        public void ModificarEstado(long id, string estado)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -83,7 +83,7 @@ namespace Negocio
             try
             {
 
-                datos.setearConsulta("SELECT P.IdPedido, UD.Nombre, U.Email, P.Fecha, P.IdHoja, P.IdCalidad, P.CopiaPorHoja, P.Margenes, P.Copias, E.Descripcion AS Estado FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN Estado E ON P.IdEstado = E.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos WHERE U.Email=@Email");
+                datos.setearConsulta("SELECT P.IdPedido, UD.Nombre, U.Email, P.Fecha, P.IdHoja, P.IdCalidad, P.CopiaPorHoja, P.Margenes, P.Copias, E.Descripcion AS Estado FROM Pedido P JOIN Usuario U ON P.IdUsuario = U.Id JOIN EstadoPedido E ON P.IdEstado = E.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos WHERE U.Email=@Email");
                 datos.setearParametro("@Email", Email);
                 datos.ejecutarLectura();
 
@@ -91,7 +91,7 @@ namespace Negocio
                 {
                     Pedido aux = new Pedido();
 
-                    aux.IdPedido = (int)datos.Lector["IdPedido"];
+                    aux.IdPedido = (long)datos.Lector["IdPedido"];
                     aux.NombreUsuario = (string)datos.Lector["Nombre"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
@@ -110,7 +110,7 @@ namespace Negocio
                     aux.Margenes = (bool)datos.Lector["Margenes"];
                     aux.Copias = (int)datos.Lector["Copias"];
 
-                    aux.Estado = (string)datos.Lector["Estado"];// ahora lo corrijo
+                    aux.Estado = (string)datos.Lector["Estado"];
 
                     lista.Add(aux);
                 }
