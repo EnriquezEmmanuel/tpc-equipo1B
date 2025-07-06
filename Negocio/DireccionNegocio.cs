@@ -15,8 +15,8 @@ namespace Negocio
             try
             {
                 datos.setearProcedimiento("InsertarDireccion");
-                datos.setearParametro("@Id", IdUser);
-                datos.setearParametro("@Direccion", direccion.Calle);
+                datos.setearParametro("@IdUsuarioDatos", IdUser);
+                datos.setearParametro("@Calle", direccion.Calle);
                 datos.setearParametro("@Altura", direccion.Altura);
                 datos.setearParametro("@Departamento", direccion.Departamento);
                 datos.setearParametro("@Piso", direccion.Piso);
@@ -42,14 +42,14 @@ namespace Negocio
             try
             {
                 datos.setearProcedimiento("FiltrarDireccionPorUsuario");
-                datos.setearParametro("@Id", IdUser);
+                datos.setearParametro("@IdUsuarioDatos", IdUser);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Direccion aux = new Direccion();
                     aux.Id = Convert.ToInt32(datos.Lector["IDDireccion"]);
-                    aux.Calle = datos.Lector["Direccion"].ToString();
+                    aux.Calle = datos.Lector["Calle"].ToString();
                     aux.Altura = datos.Lector["Altura"].ToString();
                     aux.Departamento = datos.Lector["Departamento"].ToString();
                     aux.Piso = datos.Lector["Piso"].ToString();
