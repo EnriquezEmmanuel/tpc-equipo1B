@@ -203,7 +203,53 @@ namespace Negocio
             }
         }
 
+        protected string AlfanuericoRandom(int longitud)
+        {
+            const string Caracteres = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789";
+            Random rnd = new Random();
+            char[] resultado = new char[longitud];
+            for (int i = 0; i < longitud; i++)
+            {
+                resultado[i] = Caracteres[rnd.Next(Caracteres.Length)];
+            }
+            return new string(resultado);
+        }
+        public string VerificarMail(string email)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            AccesoDatos datos2 = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT Id FROM Usuario WHERE Email=@Email");
+                datos.setearParametro("@Email", email);
 
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    if (!(datos.Lector["Id"] is DBNull))
+                    {
+                        int id = (int)datos.Lector["Id"];
+                        string claveTemporal = AlfanuericoRandom(8);
+                        datos2.setearConsulta("UPDATE Usuario SET Pass=@ClTemp WHERE Id=@Id");
+                        datos2.setearParametro("@Id", id);
+                        datos2.setearParametro("@ClTemp", claveTemporal);
+                        datos2.ejecutarAccion();
+                        return claveTemporal;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+                datos2.cerrarConexion();
+            }
+        }
 
 
     }
