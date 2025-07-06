@@ -16,11 +16,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div class="conteiner-fluid">
             <section id="menu-usuario">
                 <div id="menu">
                     <ul>
-                        <li><a href="">Inicio</a></li>
+                        <li><a href="<%= ResolveUrl("~/Default.aspx") %>">Inicio</a></li>
                         <%--<li><a href="Paginas/PageSession.aspx">Login</a></li>--%>
                         <li><a href="<%= ResolveUrl("~/Pedidos.aspx") %>">Pedidos<div class="adv-numerica alineacion-centrado-centrado">3</div>
                         </a></li>

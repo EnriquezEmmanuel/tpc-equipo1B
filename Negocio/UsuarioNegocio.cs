@@ -68,6 +68,38 @@ namespace Negocio
 
     public class UsuarioNegocio
     {
+        //public bool Loguear(Usuario usuario)
+        //{
+        //    AccesoDatos datos = new AccesoDatos();
+        //    try
+        //    {
+        //        datos.setearConsulta("select Id, IdTipoUsuario from Usuario where Email = @Email AND Pass = @Pass");
+        //        datos.setearParametro("@Email", usuario.Email);
+        //        datos.setearParametro("@Pass", usuario.Pass);
+
+        //        datos.ejecutarLectura();
+
+
+
+        //        while (datos.Lector.Read())
+        //        {
+        //            usuario.Id = Convert.ToInt32(datos.Lector["Id"]);
+        //            int tipo = Convert.ToInt32(datos.Lector["IdTipoUsuario"]);
+        //            usuario.TipoUsuario = tipo == 2 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
+        //            return true;
+        //        }
+
+        //        return false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        datos.cerrarConexion();
+        //    }
+        //}
         public bool Loguear(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -100,6 +132,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
 
         public int insertarNuevo(Usuario usuario)
         {

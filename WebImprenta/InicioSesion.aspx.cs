@@ -32,9 +32,10 @@ namespace WebImprenta
                 {
                     //Session.Add("usuario", usuario);
                     Session["usuario"] = usuario;
-                    //Modificacón Emma temporal
-                    Session["Email"] = usuario.Email;
-                    Response.Redirect("Default.aspx");
+                    if (usuario.TipoUsuario == TipoUsuario.ADMIN)
+                        Response.Redirect("~/Paginas/PageRecepcion.aspx", false);
+                    else
+                        Response.Redirect("Default.aspx", false);
                 }
                 else
                 {
@@ -46,6 +47,7 @@ namespace WebImprenta
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
 
         }
