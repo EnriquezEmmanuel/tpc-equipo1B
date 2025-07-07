@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Dominio;
+using Negocio;
+
 namespace WebImprenta.Paginas
 {
     public partial class PageShipping : System.Web.UI.Page
@@ -18,6 +21,65 @@ namespace WebImprenta.Paginas
             //    return;
             //}
 
+            //////////////////////////// Esto es para saltearme el session ////////////////////////////////
+            UsuarioNegocio listaUsuariosXX = new UsuarioNegocio();
+            Usuario User = listaUsuariosXX.listar().Find(x => x.Id == 1);
+            Usuario.Text = User.Email;
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            try
+            {
+                if (!IsPostBack)
+                {
+                    foreach (var item in User.Direcciones)
+                    {
+                        if (item.Activo)
+                        {
+
+                            string texto = item.Calle + " " + item.Altura + ", " + item.Ciudad;
+                            string valor = item.Id.ToString(); // este es el equivalente a value del Select(html)
+                            ddlDomicilios.Items.Add(new ListItem(texto, valor));
+
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MjeError("Hubo un error. Inténtelo más tarde. Error: " + ex.Message);
+            }
+                
+        }
+
+        protected void ContinuarEnvio_Click(object sender, EventArgs e)
+        {
+            if(ddlDomicilios.SelectedValue != null )
+            {
+                Usuario.Text = ddlDomicilios.SelectedValue;  //solo de muestra, esto va a Session
+                //Session...
+                //Response.Redirect(PagePay.aspx);
+            }
+            else
+            {
+                MjeError("No se cargó alguno de los datos, seleccione nuevamente.");
+            }
+        }
+        protected void MjeError(string mje)
+        {
+            limpiarModal();
+            TextoModal.Text = mje;
+        }
+        protected void limpiarModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:flex;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
+            //btnAceptarModal.Style["display"] = "none";
+        }
+        protected void DevolverModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:none;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "devolver", script, true);
+            //btnAceptarModal.Style["display"] = "flex";
         }
     }
 }

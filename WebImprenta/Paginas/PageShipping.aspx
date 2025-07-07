@@ -3,42 +3,51 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section class="Secciones contenedor-v" id="Envios">
-		<h1 class="titular-h2 margen-left-2vw">Envios</h1>
-		<div class="contenedor-v alineacion-centrado-centrado" id="contenedor-grilla">
+        <h1 class="titular-h2 margen-left-2vw">Envios</h1>
+        <div class="contenedor-v alineacion-centrado-centrado" id="contenedor-tablones">
 
-			<h2>Elegí la forma de entrega</h2>
+            <h2>Elegí la forma de entrega</h2>
 
-		<div class="tablon-claro contenedor-v alineacion-centrado-centrado">
-			
-			<div class="contenedor-v alineacion-centrado-centrado">
-				<h3>Envío a domicilio</h3>
-				<label>Elegí un domicilio: </label>
-				<select id="Domicilios" name="Domicilios" class="campos-formulario">
-				  <option value="">San Martín 1234, Tigre</option>
-				  <option value="">Alvear 1298, Benavidez</option>
-				</select>
-				<label>Elegí al repartidor: </label>
-				<select id="Repartidos" name="Repartidos" class="campos-formulario">
-				  <option value="">Mercado Libre</option>
-				  <option value="">Reparto propio</option>
-				</select>
-				<button class="boton-formulario">Continuar</button>
+            <div class="tablon-claro contenedor-v alineacion-centrado-centrado">
+
+                <div class="contenedor-v alineacion-centrado-centrado">
+                    <h3>Envío a domicilio</h3>
+
+                    <label>Elegí un domicilio: </label>
+
+                    <asp:DropDownList ID="ddlDomicilios" CssClass="campos-formulario" runat="server" ></asp:DropDownList>
+
+
+                    <label>Elegí al repartidor: </label>
+
+                    <select id="Repartidos" name="Repartidos" class="campos-formulario">
+                        <option value="">Mercado Libre</option>
+                        <option value="">Reparto propio</option>
+                    </select>
+
+                    <asp:Button Text="Continuar"  OnClick="ContinuarEnvio_Click" CssClass="boton-formulario" runat="server" />
+
+                    <!--------------- temporal de prueba ------------------>
+                    <asp:Label Text="" ID="Usuario" runat="server" />
+                    <!----------------------------------------------------->
+
+                </div>
+            </div>
+        </div>
+        <div class="tablon-claro contenedor-v alineacion-centrado-centrado">
+            <div>
+                <h3>Retirálo en nuestro local</h3>
+                <p>Av. Marquez 123, San Isidro.</p>
+            </div>
+
+            <button class="boton-formulario">Continuar</button>
+
+        </div>
+    </section>
+    <section id="ventana-modal">
+        <asp:Label Text="" runat="server" ID="TextoModal"/>
+			<div class="contenedor-h alineacion-centrado-final">
+				<button class="boton-formulario" id="cancelar-modal">Aceptar</button>
 			</div>
-		</div>
-		<div class="tablon-claro contenedor-v alineacion-centrado-centrado">
-			<div>
-				<h3>Retirálo en nuestro local</h3>
-				<p>Av. Marquez 123, San Isidro.</p>
-			</div>
-			<button class="boton-formulario">Continuar</button>
-		</div>
-	</section>
-	<section id="ventana-modal">
-		<p id="texto-modal">Esto es un texto modal: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua.</p>
-		<div class="contenedor-h alineacion-centrado-final">
-			<button class="boton-formulario" id="aceptar-modal">Aceptar</button>
-			<button class="boton-formulario" id="cancelar-modal">Cancelar</button>
-		</div>
-	</section>
+    </section>
 </asp:Content>

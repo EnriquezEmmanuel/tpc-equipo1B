@@ -41,8 +41,10 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("FiltrarDireccionPorUsuario");
-                datos.setearParametro("@IdUsuarioDatos", IdUser);
+                //datos.setearProcedimiento("FiltrarDireccionPorUsuario");
+                datos.setearProcedimiento("FiltrarDireccionPorIdUsuario");
+                //datos.setearParametro("@IdUsuarioDatos", IdUser);
+                datos.setearParametro("@Id", IdUser);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

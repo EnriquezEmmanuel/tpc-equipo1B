@@ -23,6 +23,9 @@ namespace Negocio
                     DatosUsuarioNegocio udNegocio = new DatosUsuarioNegocio();
                     List<DatosUsuario> ListaDatosUsuario = new List<DatosUsuario>();
                     ListaDatosUsuario = udNegocio.Listar();
+
+                    //List<Direccion> ListaDirecciones = new List<Direccion>();
+                    DireccionNegocio dNegocio = new DireccionNegocio();
                     
                     while (datos.Lector.Read())
                     {
@@ -38,9 +41,12 @@ namespace Negocio
                         long IdDatosUsuario= (long)datos.Lector["IdUsuarioDatos"];
                         aux.DatosUsuario = ListaDatosUsuario.Find(x => x.Id == IdDatosUsuario);
 
-                        //aux.UsuarioDatos = (long)datos.Lector["UsuarioDatos"];
 
-                        listaUsuarios.Add(aux);
+                        aux.Direcciones = dNegocio.ListarDirecciones(aux.Id);
+
+                    //aux.UsuarioDatos = (long)datos.Lector["UsuarioDatos"];
+
+                    listaUsuarios.Add(aux);
                     }
                     return listaUsuarios;
                 }
