@@ -12,50 +12,50 @@ namespace Negocio
     public class UsuarioNegocio
     {
         public List<Usuario> listar()
+        {
+            List<Usuario> listaUsuarios = new List<Usuario>();
+            AccesoDatos datos = new AccesoDatos();
+            try
             {
-                List<Usuario> listaUsuarios = new List<Usuario>();
-                AccesoDatos datos = new AccesoDatos();
-                try
+                datos.setearConsulta("SELECT id, Email, Pass, TipoUsuario, IdUsuarioDatos FROM Usuario");
+                datos.ejecutarLectura();
+
+                DatosUsuarioNegocio udNegocio = new DatosUsuarioNegocio();
+                List<DatosUsuario> ListaDatosUsuario = new List<DatosUsuario>();
+                ListaDatosUsuario = udNegocio.Listar();
+
+                //List<Direccion> ListaDirecciones = new List<Direccion>();
+                DireccionNegocio dNegocio = new DireccionNegocio();
+
+                while (datos.Lector.Read())
                 {
-                    datos.setearConsulta("SELECT id, Email, Pass, TipoUsuario, IdUsuarioDatos FROM Usuario");
-                    datos.ejecutarLectura();
+                    Usuario aux = new Usuario();
 
-                    DatosUsuarioNegocio udNegocio = new DatosUsuarioNegocio();
-                    List<DatosUsuario> ListaDatosUsuario = new List<DatosUsuario>();
-                    ListaDatosUsuario = udNegocio.Listar();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Pass = (string)datos.Lector["Pass"];
 
-                    //List<Direccion> ListaDirecciones = new List<Direccion>();
-                    DireccionNegocio dNegocio = new DireccionNegocio();
-                    
-                    while (datos.Lector.Read())
-                    {
-                        Usuario aux = new Usuario();
+                    int tipo = Convert.ToInt32(datos.Lector["TipoUsuario"]);
+                    aux.TipoUsuario = tipo == 2 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
 
-                        aux.Id = (int)datos.Lector["Id"];
-                        aux.Email = (string)datos.Lector["Email"];
-                        aux.Pass = (string)datos.Lector["Pass"];
-
-                        int tipo = Convert.ToInt32(datos.Lector["TipoUsuario"]);
-                        aux.TipoUsuario = tipo == 2 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
-
-                        long IdDatosUsuario= (long)datos.Lector["IdUsuarioDatos"];
-                        aux.DatosUsuario = ListaDatosUsuario.Find(x => x.Id == IdDatosUsuario);
+                    long IdDatosUsuario = (long)datos.Lector["IdUsuarioDatos"];
+                    aux.DatosUsuario = ListaDatosUsuario.Find(x => x.Id == IdDatosUsuario);
 
 
-                        aux.Direcciones = dNegocio.ListarDirecciones(aux.Id);
+                    aux.Direcciones = dNegocio.ListarDirecciones(aux.Id);
 
                     //aux.UsuarioDatos = (long)datos.Lector["UsuarioDatos"];
 
                     listaUsuarios.Add(aux);
-                    }
-                    return listaUsuarios;
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally { datos.cerrarConexion(); }
+                return listaUsuarios;
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally { datos.cerrarConexion(); }
+        }
            
         public bool Loguear(Usuario usuario)
         {

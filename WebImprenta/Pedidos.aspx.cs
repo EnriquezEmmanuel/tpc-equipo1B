@@ -335,6 +335,9 @@ namespace WebImprenta
             {
                 hdnUrlImagenSubida.Value = "";
             }
+
+
+
         }
         private string ProcesarArchivo(HttpPostedFile archivoSubido, string enlace, out string mensaje)
         {

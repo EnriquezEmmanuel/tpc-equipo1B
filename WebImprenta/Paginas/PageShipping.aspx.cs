@@ -24,8 +24,12 @@ namespace WebImprenta.Paginas
             //////////////////////////// Esto es para saltearme el session ////////////////////////////////
             UsuarioNegocio listaUsuariosXX = new UsuarioNegocio();
             Usuario User = listaUsuariosXX.listar().Find(x => x.Id == 1);
-            Usuario.Text = User.Email;
+            IdDireccion.Text = User.Email;
             ///////////////////////////////////////////////////////////////////////////////////////////////
+
+            NegocioMetodoEnvio meNegocio = new NegocioMetodoEnvio();
+            List<MetodoEnvio> listaRepartidor = meNegocio.listar();
+            
             try
             {
                 if (!IsPostBack)
@@ -34,13 +38,14 @@ namespace WebImprenta.Paginas
                     {
                         if (item.Activo)
                         {
-
                             string texto = item.Calle + " " + item.Altura + ", " + item.Ciudad;
                             string valor = item.Id.ToString(); // este es el equivalente a value del Select(html)
                             ddlDomicilios.Items.Add(new ListItem(texto, valor));
-
                         }
-
+                    }
+                    foreach(var item in listaRepartidor)
+                    {
+                        ddlRepartidor.Items.Add(item.Metodo);
                     }
                 }
             }
@@ -53,11 +58,30 @@ namespace WebImprenta.Paginas
 
         protected void ContinuarEnvio_Click(object sender, EventArgs e)
         {
-            if(ddlDomicilios.SelectedValue != null )
+            if(ddlDomicilios.SelectedValue != null && ddlRepartidor.SelectedValue != null )
             {
-                Usuario.Text = ddlDomicilios.SelectedValue;  //solo de muestra, esto va a Session
-                //Session...
-                //Response.Redirect(PagePay.aspx);
+                //IdDireccion.Text = ddlDomicilios.SelectedValue;  //solo de muestra, esto va a Session
+                //MetodoEnvio.Text = ddlRepartidor.SelectedValue;  //solo de muestra, esto va a Session
+
+                Session.Add("Domicilio", ddlDomicilios.SelectedValue);
+                Session.Add("Repartidor", ddlRepartidor.SelectedValue);
+                Response.Redirect("PagePay.aspx");
+            }
+            else
+            {
+                MjeError("No se cargó alguno de los datos, seleccione nuevamente.");
+            }
+        }
+        protected void ContinuarSinEnvio_Click(object sender, EventArgs e)
+        {
+            if (ddlDomicilios.SelectedValue != null && ddlRepartidor.SelectedValue != null)
+            {
+                //IdDireccion.Text = ddlDomicilios.SelectedValue;  //solo de muestra, esto va a Session
+                //MetodoEnvio.Text = DireccionLocal.Text;           //solo de muestra, esto va a Session
+
+                Session.Add("Domicilio", ddlDomicilios.SelectedValue);
+                Session.Add("Repartidor", DireccionLocal.Text);
+                Response.Redirect("PagePay.aspx");
             }
             else
             {
@@ -81,5 +105,7 @@ namespace WebImprenta.Paginas
             ClientScript.RegisterStartupScript(this.GetType(), "devolver", script, true);
             //btnAceptarModal.Style["display"] = "flex";
         }
+
+        
     }
 }
