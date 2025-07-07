@@ -31,7 +31,13 @@ namespace WebImprenta
             }
             else
             {
-                Usuario User= (Usuario)Session["Usuario"];
+                Usuario User = (Usuario)Session["Usuario"];
+                ////// Usuario codeado reemplaza Session para pruebas
+
+                //UsuarioNegocio listaUsuariosXX = new UsuarioNegocio();
+                //Usuario User = listaUsuariosXX.listar().Find(x => x.Id == 1 );
+
+                //////
                 PedidoNegocio pNegocio = new PedidoNegocio();
                 List<Pedido> ListaPedidos = new List<Pedido>();
                 ListaPedidos = pNegocio.BuscarPedidos(User.Email);
@@ -43,13 +49,13 @@ namespace WebImprenta
                     foreach (var item in ListaPedidos)
                     {
                         if (item.Margenes) margenes = "Si"; else margenes = "No";
-                        ContenedorPedidos.InnerHtml += "<div class=\"tablon-claro contenedor-v alineacion-centrado-centrado entero\">" +
+                        ContenedorPedidos.InnerHtml += "<div class=\"tablon-claro contenedor-v alineacion-centrado-centrado entero txt-em9\">" +
                             "<h2 class=\"txt-familia-Rto txt-bold txt-1em3 entero\">Pedido #<span id=\"txt-numero-pedido\">" + item.IdPedido.ToString() + "</span>	|	<span>" + item.NombreUsuario + "</span>	|	<span id=\"txt-estado-pedido\" class=\"txt-normal txt-familia-Rto-Slab\">" + item.Estado + "</span></h2>" +
                             "<div class=\"contenedor-h alineacion-around-inicio entero \">" +
                             "<div><h3>Hoja</h3><ul><li class=\"margen-bottom-0em3\">Tamaño: " + item.Hoja.Tamaño + "</li><li class=\"margen-bottom-0em3\">Tipo:" + item.Hoja.TipoPapel + "</li><li class=\"margen-bottom-0em3\">Gramaje: " + item.Hoja.Gramaje + "</li></ul></div>" +
-                            "<div><h3>Calidad</h3><ul><li class=\"margen-bottom-0em3\">" + item.Calidad.Color + "</li><li class=\"margen-bottom-0em3\">" + item.Calidad.Tipo + "</li><li class=\"margen-bottom-0em3\">Simple</li></ul></div>" +
+                            "<div><h3>Calidad</h3><ul><li class=\"margen-bottom-0em3\">" + item.Calidad.Color + "</li><li class=\"margen-bottom-0em3\">" + item.Calidad.Tipo + "</li></ul></div>" +
                             "<div><h3>Detalles de <br>impresión</h3><ul><li class=\"margen-bottom-0em3\">Copias por hoja: " + item.CopiaPorHoja.ToString() + "</li><li class=\"margen-bottom-0em3\">Cantidad de copias: " + item.Copias.ToString() + "</li><li class=\"margen-bottom-0em3\">Margen (2mm): " + margenes + "</li></ul></div>" +
-                            "<div class=\"contenedor-v alineacion-final-inicio\"><h3>Precio</h3><p" + item.PrecioPedido.ToString() + "</p><h3>Envío</h3><p>$1000</p></div>" +
+                            "<div class=\"contenedor-v alineacion-final-inicio\"><h3>Precio</h3><p>" + item.PrecioPedido.ToString() + "</p><h3>Envío</h3><p>$1000</p></div>" +
                             "</div></div>";
 
                         //No está funcionando el precio.

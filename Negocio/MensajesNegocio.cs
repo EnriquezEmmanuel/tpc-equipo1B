@@ -15,7 +15,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT M.Id, M.IdPedido, UD.Nombre, TU.Tipo AS TipoUsuario, M.Fecha, M.Mensaje FROM Mensajes M JOIN Usuario U ON M.IdUsuario = U.Id JOIN TipoUsuario TU ON U.IdTipoUsuario = TU.Id JOIN UsuarioDatos UD ON UD.IdUsuario= U.Id");
+                datos.setearConsulta("SELECT M.Id, M.IdPedido, UD.Nombre, U.TipoUsuario, M.Fecha, M.Mensaje FROM Mensajes M JOIN Usuario U ON M.IdUsuario = U.Id JOIN UsuarioDatos UD ON U.IdUsuarioDatos = UD.IdUsuarioDatos");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -25,7 +25,7 @@ namespace Negocio
                     aux.Id = (int)datos.Lector["Id"];
                     aux.IdPedido = (long)datos.Lector["IdPedido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.TipoUsuario = (string)datos.Lector["TipoUsuario"];
+                    aux.TipoUsuario = Convert.ToInt32(datos.Lector["TipoUsuario"]);
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
                     aux.Mensaje = (string)datos.Lector["Mensaje"];
 

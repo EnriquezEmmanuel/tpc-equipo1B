@@ -9,6 +9,35 @@ namespace Negocio
 {
     public class DatosUsuarioNegocio
     {
+        public List<DatosUsuario> Listar()
+        {
+            List<DatosUsuario> listaDatosUsuario = new List<DatosUsuario>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT IdUsuarioDatos, Nombre, Apellido, DNI FROM UsuarioDatos");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    DatosUsuario aux = new DatosUsuario();
+
+                    aux.Id = (long)datos.Lector["IdUsuarioDatos"];
+                    aux.Nombre = (string)datos.Lector["Nombre"]; 
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    if (!(datos.Lector["DNI"] is DBNull))
+                        aux.Dni = (long)datos.Lector["DNI"];
+
+                    listaDatosUsuario.Add(aux);
+
+                }
+                return listaDatosUsuario;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public bool insertarUsuarioDatos(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();

@@ -24,8 +24,7 @@
         <section id="ventana-modal">		
 			<asp:Label Text="" runat="server" ID="TextoModal"/>
 			<div class="contenedor-h alineacion-centrado-final">
-				<%--<button class="boton-formulario" id="aceptar-modal">Aceptar</button>--%>
-				<button class="boton-formulario" id="cancelar-modal">Cancelar</button>
+				<button class="boton-formulario" id="cancelar-modal">Aceptar</button>
 			</div>
 		</section>
 </asp:Content>

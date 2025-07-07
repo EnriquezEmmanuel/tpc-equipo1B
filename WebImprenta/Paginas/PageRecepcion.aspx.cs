@@ -75,7 +75,7 @@ namespace WebImprenta.Paginas
 
             }
             catch (Exception ex)
-            { MjeError("Hubo un error en la carga de la página. Intentelo más tarde" + ex.ToString()); }
+            { MjeError("Hubo un error en la carga de la página. Intentelo más tarde. Error: " + ex.Message); }
         }
         protected void MjeError(string mje)
         {
@@ -102,7 +102,7 @@ namespace WebImprenta.Paginas
             {
                 DevolverModal();
 
-                int IdPedidoSeleccionado = (int)grillaPedidos.SelectedDataKey.Value;
+                long IdPedidoSeleccionado = (long)grillaPedidos.SelectedDataKey.Value;
                 PedidoSeleccionado = ListaPedidos.Find(x => x.IdPedido == IdPedidoSeleccionado);
                 //----------- Id para cambiar el estado -----------
                 TextoModal.Text = PedidoSeleccionado.NombreUsuario;
@@ -138,14 +138,11 @@ namespace WebImprenta.Paginas
 
                     switch (item.TipoUsuario)
                     {
-                        case "Operador":
-                            ContenedorMensajes.InnerHtml += "<div class=\"margen-bottom-1vw margen-left-5vw txt-oblique txt-color-blanco-1 entero\"><span class=\"txt-bold-oblique  txt-color-resaltado-1\">" + item.Nombre + "(Operador/a)</span> <span class=\"txt-oblique  txt-color-blanco-2\">" + item.Fecha + "</span><br>" + item.Mensaje + "</div>";
-                            break;
-                        case "Encargado":
-                            ContenedorMensajes.InnerHtml += "<div class=\"margen-bottom-1vw margen-left-5vw txt-oblique txt-color-blanco-1 entero\"><span class=\"txt-bold-oblique  txt-color-resaltado-3\">" + item.Nombre + "(Encargado/a)</span> <span class=\"txt-oblique  txt-color-blanco-2\">" + item.Fecha + "</span><br>" + item.Mensaje + "</div>";
-                            break;
-                        default:
+                        case 1:
                             ContenedorMensajes.InnerHtml += "<div class=\"margen-bottom-1vw txt-oblique txt-color-blanco-1 entero\"><span class=\"txt-bold-oblique  txt-color-resaltado-2\">" + item.Nombre + "</span> <span class=\"txt-oblique  txt-color-blanco-2\">" + item.Fecha + "</span><br>" + item.Mensaje + "</div>";
+                            break;
+                        case 2:
+                            ContenedorMensajes.InnerHtml += "<div class=\"margen-bottom-1vw margen-left-5vw txt-oblique txt-color-blanco-1 entero\"><span class=\"txt-bold-oblique  txt-color-resaltado-1\">" + item.Nombre + "(Operador/a)</span> <span class=\"txt-oblique  txt-color-blanco-2\">" + item.Fecha + "</span><br>" + item.Mensaje + "</div>";
                             break;
                     }
                 }
@@ -157,8 +154,8 @@ namespace WebImprenta.Paginas
                 //"<p>"+ Server.HtmlEncode(TextoC) + "</p>";
 
             }
-            catch (Exception)
-            { MjeError("Surgió un problema en la selección del pedido. Intentelo más tarde"); }
+            catch (Exception ex)
+            { MjeError("Surgió un problema en la selección del pedido. Intentelo más tarde. Error: "+ex.ToString()); }
 
         }
 
@@ -183,8 +180,8 @@ namespace WebImprenta.Paginas
                     TextoModal.Text = "Debe seleccionar un pedido.";
                 }
             }
-            catch (Exception)
-            { MjeError("Surgio un problema al itentar cambiar el estado. Intentelo más tarde"); }
+            catch (Exception ex)
+            { MjeError("Surgio un problema al itentar cambiar el estado. Intentelo más tarde. Error: " + ex.Message); }
         }
 
         protected void EnviarMensaje_Click(object sender, EventArgs e)
@@ -206,8 +203,8 @@ namespace WebImprenta.Paginas
                 }
                 MensajeAenviar.Text = "";
             }
-            catch (Exception)
-            { MjeError("No se pudo enviar el mensaje. Intentelo más tarde"); }
+            catch (Exception ex)
+            { MjeError("No se pudo enviar el mensaje. Intentelo más tarde. Error: " + ex.Message); }
         }
     }
 }
