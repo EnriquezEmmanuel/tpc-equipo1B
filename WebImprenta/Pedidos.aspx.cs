@@ -282,6 +282,7 @@ namespace WebImprenta
                 if (guardadoCorrectamente)
                 {
                     // Aca tiene que Redirigir a pagina envios
+                    Response.Redirect("Paginas/PageShipping.aspx");
                 }
                 else
                 {
@@ -335,7 +336,6 @@ namespace WebImprenta
             {
                 hdnUrlImagenSubida.Value = "";
             }
-
 
 
         }

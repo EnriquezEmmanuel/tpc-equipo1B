@@ -57,28 +57,39 @@ namespace Negocio
             finally { datos.cerrarConexion(); }
         }
            
-        public bool Loguear(Usuario usuario)
+        public Usuario Loguear(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select Id, TipoUsuario from Usuario where Email = @Email AND Pass = @Pass");
+                
+                datos.setearConsulta("SELECT Id, Email, Pass, TipoUsuario, IdUsuarioDatos FROM Usuario WHERE Email = @Email AND Pass = @Pass");
                 datos.setearParametro("@Email", usuario.Email);
                 datos.setearParametro("@Pass", usuario.Pass);
 
                 datos.ejecutarLectura();
 
-
+                DatosUsuarioNegocio udNegocio = new DatosUsuarioNegocio();
+                List<DatosUsuario> ListaDatosUsuario = new List<DatosUsuario>();
+                ListaDatosUsuario = udNegocio.Listar();
+                DireccionNegocio dNegocio = new DireccionNegocio();
 
                 while (datos.Lector.Read())
                 {
                     usuario.Id = Convert.ToInt32(datos.Lector["Id"]);
+
                     int tipo = Convert.ToInt32(datos.Lector["TipoUsuario"]);
                     usuario.TipoUsuario = tipo == 2 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
-                    return true;
+
+                    long IdDatosUsuario = (long)datos.Lector["IdUsuarioDatos"];
+                    usuario.DatosUsuario = ListaDatosUsuario.Find(x => x.Id == IdDatosUsuario);
+
+                    usuario.Direcciones = dNegocio.ListarDirecciones(usuario.Id);
+
+                    return usuario;
                 }
 
-                return false;
+                return null;
             }
             catch (Exception ex)
             {

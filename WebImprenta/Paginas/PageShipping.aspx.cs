@@ -14,46 +14,43 @@ namespace WebImprenta.Paginas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["usuario"] == null)
-            //{
-            //    Session.Add("error", "Debes loguearte para ingresar");
-            //    Response.Redirect("Error.aspx", false);
-            //    return;
-            //}
-
-            //////////////////////////// Esto es para saltearme el session ////////////////////////////////
-            UsuarioNegocio listaUsuariosXX = new UsuarioNegocio();
-            Usuario User = listaUsuariosXX.listar().Find(x => x.Id == 1);
-            IdDireccion.Text = User.Email;
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-
-            NegocioMetodoEnvio meNegocio = new NegocioMetodoEnvio();
-            List<MetodoEnvio> listaRepartidor = meNegocio.listar();
-            
-            try
+            if (Session["usuario"] == null)
             {
-                if (!IsPostBack)
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
+            else
+            {
+                Usuario User = (Usuario)Session["usuario"];
+
+                NegocioMetodoEnvio meNegocio = new NegocioMetodoEnvio();
+                List<MetodoEnvio> listaRepartidor = meNegocio.listar();
+
+                try
                 {
-                    foreach (var item in User.Direcciones)
+                    if (!IsPostBack)
                     {
-                        if (item.Activo)
+                        foreach (var item in User.Direcciones)
                         {
-                            string texto = item.Calle + " " + item.Altura + ", " + item.Ciudad;
-                            string valor = item.Id.ToString(); // este es el equivalente a value del Select(html)
-                            ddlDomicilios.Items.Add(new ListItem(texto, valor));
+                            if (item.Activo)
+                            {
+                                string texto = item.Calle + " " + item.Altura + ", " + item.Ciudad;
+                                string valor = item.Id.ToString(); // este es el equivalente a value del Select(html)
+                                ddlDomicilios.Items.Add(new ListItem(texto, valor));
+                            }
+                        }
+                        foreach (var item in listaRepartidor)
+                        {
+                            ddlRepartidor.Items.Add(item.Metodo);
                         }
                     }
-                    foreach(var item in listaRepartidor)
-                    {
-                        ddlRepartidor.Items.Add(item.Metodo);
-                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MjeError("Hubo un error. Inténtelo más tarde. Error: " + ex.Message);
-            }
-                
+                catch (Exception ex)
+                {
+                    MjeError("Hubo un error. Inténtelo más tarde. Error: " + ex.Message);
+                }
+            }   
         }
 
         protected void ContinuarEnvio_Click(object sender, EventArgs e)

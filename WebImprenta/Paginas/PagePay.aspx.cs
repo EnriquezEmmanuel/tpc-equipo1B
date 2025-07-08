@@ -11,14 +11,14 @@ namespace WebImprenta.Paginas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["usuario"] == null)
-            //{
-            //    Session.Add("error", "Debes loguearte para ingresar");
-            //    Response.Redirect("Error.aspx", false);
-            //    return;
-            //}
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
 
-            string BloquePagAnterior = Session["Domicilio"].ToString()+", "+ Session["Repartidor"].ToString();
+            string BloquePagAnterior = Session["Domicilio"].ToString()+", "+ Session["Subtotal"].ToString();
             ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('"+BloquePagAnterior+"');", true);
         }
     }

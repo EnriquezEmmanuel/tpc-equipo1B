@@ -21,21 +21,23 @@ namespace WebImprenta
         }
         protected void BtnConfirmar_Click(object sender, EventArgs e)
         {
-            Usuario usuario;
+            
             UsuarioNegocio negocio = new UsuarioNegocio();
             try
             {
-                usuario = new Usuario(txtCorreo.Text, txtContrasenia.Text, false);
+                Usuario usuario = new Usuario(txtCorreo.Text, txtContrasenia.Text, false);
+                Usuario UsuarioCompleto = negocio.Loguear(usuario);
 
 
-                if (negocio.Loguear(usuario))
+                if (UsuarioCompleto != null)
                 {
-                    //Session.Add("usuario", usuario);
-                    Session["usuario"] = usuario;
-                    if (usuario.TipoUsuario == TipoUsuario.ADMIN)
+                    Session["usuario"] = UsuarioCompleto;
+
+                    if (UsuarioCompleto.TipoUsuario == TipoUsuario.ADMIN)
                         Response.Redirect("~/Paginas/PageRecepcion.aspx", false);
                     else
                         Response.Redirect("Default.aspx", false);
+
                 }
                 else
                 {
