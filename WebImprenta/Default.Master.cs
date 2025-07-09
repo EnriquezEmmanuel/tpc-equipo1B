@@ -13,7 +13,7 @@ namespace WebImprenta
         {
 
         }
-        protected void btnSalir_Click(object sender, EventArgs e)
+        protected void Desloguear_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Response.Redirect("InicioSesion.aspx", false);

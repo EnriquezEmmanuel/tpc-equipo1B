@@ -63,7 +63,7 @@
 
             lblPrecioDetalles.textContent = "$" + precioDetalles.toFixed(2);
             lblSubtotal.textContent = "$" + subtotal.toFixed(2);
-            hdnSubtotal.value = subtotal.toFixed(2);
+            hdnSubtotal.value = subtotal.toFixed(2).replace(".", ",");
         }
 
         function inicializarEventosSubtotal() {

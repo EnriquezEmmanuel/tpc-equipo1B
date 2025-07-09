@@ -4,6 +4,7 @@ function inicio() {
 	Id('btn-abrir-modal').addEventListener('click', activarModal, false);
 	Id('btn-cerrar-modal').addEventListener('click', quitarModal, false);
 	Id('aceptar-modal').addEventListener('click', quitarModal, false);
+	Id('detener-enlace').addEventListener('click', detenerEnlace, false);
 	
 }
 
@@ -25,3 +26,4 @@ function activarModal(e) {
 	e.preventDefault();
 	Id('ventana-modal').style = 'display:flex;'
 }
+function detenerEnlace(e) { e.preventDefault(); }

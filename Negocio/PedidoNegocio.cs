@@ -64,7 +64,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Pedido SET IdEstado = (SELECT Id FROM Estado WHERE Descripcion = @estado) WHERE IdPedido = @id");
+                datos.setearConsulta("UPDATE Pedido SET IdEstado = (SELECT Id FROM EstadoPedido WHERE Descripcion = @estado) WHERE IdPedido = @id");
                 datos.setearParametro("@id", id);
                 datos.setearParametro("@estado", estado);
                 datos.ejecutarAccion();

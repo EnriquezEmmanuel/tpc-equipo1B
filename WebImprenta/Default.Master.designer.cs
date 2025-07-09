@@ -33,13 +33,13 @@ namespace WebImprenta
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control btnSalir.
+        /// Control Desloguear.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalir;
+        protected global::System.Web.UI.WebControls.ImageButton Desloguear;
 
         /// <summary>
         /// Control ContentPlaceHolder1.

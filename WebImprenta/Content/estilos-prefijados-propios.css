@@ -317,6 +317,10 @@ input:focus, select:focus, img:focus, a:focus, button:focus, p:focus, div:focus,
     margin-right: 1em;
     filter: opacity(50%);
 }
+.icono-logout {
+    width: 2em;
+    align-self: center;
+}
 
 footer {
     display: flex;

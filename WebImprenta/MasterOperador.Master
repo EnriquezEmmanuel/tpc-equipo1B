@@ -16,27 +16,27 @@
     <form id="form1" runat="server">
         <div>
             <section id="menu-usuario">
-                <div id="menu">
+                <div id="menu" class="contenedor-h">
                     <ul>
                         <li><a href="PagePedidos.aspx">Pedidos<div class="adv-numerica alineacion-centrado-centrado" runat="server" id="divAdvertencia"></div>
                         </a></li>
                         <li><a href="PageEnvios.aspx">Envios</a></li>
                         <li><a href="PageMensajes.aspx">Mensajes</a></li>
-                        <div class="d-flex align-items-center">
-
-                            <% if (Session["usuario"] == null)
-                    { %>
-                            <a href="InicioSesion.aspx" class="btn btn-primary">Login</a>
-                            <% }
-                else
-                { %>
-                            <asp:Button Text="Salir" ID="btnSalir" CssClass="btn btn-outline-light" OnClick="btnSalir_Click" runat="server" />
-                            <% } %>
-                        </div>
-                        <!--li><a href="#Pagos">Pagos</a></!--li>
-	        <li><a href="#Catalogo">Catalogo de productos</a></li-->
+                         
                     </ul>
                 </div>
+                <div class="contenedor-h alineacion-final-centrado margen-right-2vw" id="caja-usuario">
+
+                    <% if (Session["usuario"] == null){ %>
+
+                        <a href="InicioSesion.aspx" class="margen-right-2vw">Login</a>
+
+                    <% }else{ %>
+
+                        <asp:ImageButton ID="Desloguear" runat="server" OnClick="Desloguear_Click" ImageUrl="~/imagenes/iconos/logout.png" CssClass="icono-logout" ToolTip="Desloguearse"/>
+                    
+                    <% } %>
+		        </div>
             </section>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

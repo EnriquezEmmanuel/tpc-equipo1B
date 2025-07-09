@@ -37,7 +37,6 @@ namespace WebImprenta
                         Response.Redirect("~/Paginas/PageRecepcion.aspx", false);
                     else
                         Response.Redirect("Default.aspx", false);
-
                 }
                 else
                 {
@@ -56,7 +55,7 @@ namespace WebImprenta
 
         protected void BtnRecuperarContraseña_Click(object sender, EventArgs e)
         {
-            Response.Redirect("RecuperarContraseña.aspx", false);
+            Response.Redirect("Paginas/PageLossPass.aspx", false);
         }
     }
 }

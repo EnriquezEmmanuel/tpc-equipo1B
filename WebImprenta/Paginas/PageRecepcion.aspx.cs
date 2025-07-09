@@ -29,10 +29,10 @@ namespace WebImprenta.Paginas
             try
             {
                 PedidoNegocio pNegocio = new PedidoNegocio();
-                ListaPedidos = pNegocio.lista(); // g u a r d a r   e n   s e s i ó n
+                ListaPedidos = pNegocio.lista(); 
                 HojaNegocio hNegocio = new HojaNegocio();                
                 EstadoPedidoNegocio eNegocio = new EstadoPedidoNegocio();
-                ListaEstadoPedidos = eNegocio.lista(); // g u a r d a r   e n   s e s i ó n                
+                ListaEstadoPedidos = eNegocio.lista();         
 
 
                 grillaPedidos.DataSource = ListaPedidos;
@@ -59,7 +59,7 @@ namespace WebImprenta.Paginas
                     //---------- Modificación dinámica de la cantidad e pedidos inconclusos ----------
                     if (contPedidosInconclusos == 0)
                     {
-                        string script = "Id('divAdvertencia').style = style = 'opacity:0;' ";
+                        string script = "Id('divAdvertencia').style = 'opacity:0;' ";
                         ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
                     }
                     else
@@ -77,25 +77,7 @@ namespace WebImprenta.Paginas
             catch (Exception ex)
             { MjeError("Hubo un error en la carga de la página. Intentelo más tarde. Error: " + ex.Message); }
         }
-        protected void MjeError(string mje)
-        {
-            limpiarModal();
-            TextoModal.Text = mje;
-        }
-        protected void limpiarModal()
-        {
-            string script = "Id('ventana-modal').style = 'display:flex;';";
-            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
-            ddlListaEstados.Style["display"] = "none";
-            btnAceptarModal.Style["display"] = "none";
-        }
-        protected void DevolverModal()
-        {
-            string script = "Id('ventana-modal').style = 'display:none;';";
-            ClientScript.RegisterStartupScript(this.GetType(), "devolver", script, true);
-            ddlListaEstados.Style["display"] = "flex";
-            btnAceptarModal.Style["display"] = "flex";
-        }
+        
         protected void grillaPedidos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -177,7 +159,7 @@ namespace WebImprenta.Paginas
                 else
                 {
                     limpiarModal();
-                    TextoModal.Text = "Debe seleccionar un pedido.";
+                    TextoModal.Text = "Debe seleccionar un estado para el pedido.";
                 }
             }
             catch (Exception ex)
@@ -205,6 +187,27 @@ namespace WebImprenta.Paginas
             }
             catch (Exception ex)
             { MjeError("No se pudo enviar el mensaje. Intentelo más tarde. Error: " + ex.Message); }
+        }
+
+        //////////////////////// Mensajes de error ///////////////////////////////////
+        protected void MjeError(string mje)
+        {
+            limpiarModal();
+            TextoModal.Text = mje;
+        }
+        protected void limpiarModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:flex;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
+            ddlListaEstados.Style["display"] = "none";
+            btnAceptarModal.Style["display"] = "none";
+        }
+        protected void DevolverModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:none;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "devolver", script, true);
+            ddlListaEstados.Style["display"] = "flex";
+            btnAceptarModal.Style["display"] = "flex";
         }
     }
 }

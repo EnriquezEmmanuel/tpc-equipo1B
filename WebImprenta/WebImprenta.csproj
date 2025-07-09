@@ -157,6 +157,7 @@
     <Content Include="Global.asax" />
     <Content Include="InicioSesion.aspx" />
     <Content Include="MiPerfil.aspx" />
+    <Content Include="Paginas\PageCatalog.aspx" />
     <Content Include="Paginas\PageLossPass.aspx" />
     <Content Include="Paginas\PagePay.aspx" />
     <Content Include="Paginas\PageRecepcion.aspx" />
@@ -251,6 +252,13 @@
     </Compile>
     <Compile Include="MiPerfil.aspx.designer.cs">
       <DependentUpon>MiPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PageCatalog.aspx.cs">
+      <DependentUpon>PageCatalog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageCatalog.aspx.designer.cs">
+      <DependentUpon>PageCatalog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\PageLossPass.aspx.cs">
       <DependentUpon>PageLossPass.aspx</DependentUpon>
