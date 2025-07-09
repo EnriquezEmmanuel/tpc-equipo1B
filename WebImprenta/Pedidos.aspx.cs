@@ -265,13 +265,11 @@ namespace WebImprenta
                 Session["DobleCara"] = ddlDobleCara.SelectedValue;
 
 
-                string copiasPorHoja = Request.Form["inputCopiasPorHoja"];
-                string numeroCopias = Request.Form["txtNumeroCopias"];
                 string margen = ddlMargen.SelectedValue;
                 string posicion = ddlPosicion.SelectedValue;
 
-                Session["CopiasPorHoja"] = copiasPorHoja;
-                Session["NumeroCopias"] = numeroCopias;
+                Session["CopiasPorHoja"] = txtCopiasPorHoja.Text;
+                Session["NumeroCopias"] = txtNumeroCopias.Text;
                 Session["Margen"] = margen;
                 Session["Posicion"] = posicion;
 
@@ -281,8 +279,7 @@ namespace WebImprenta
 
                 if (guardadoCorrectamente)
                 {
-                    // Aca tiene que Redirigir a pagina envios
-                    Response.Redirect("Paginas/PageShipping.aspx");
+                    Response.Redirect("Paginas/PageShipping");
                 }
                 else
                 {
@@ -336,6 +333,7 @@ namespace WebImprenta
             {
                 hdnUrlImagenSubida.Value = "";
             }
+
 
 
         }
@@ -544,7 +542,7 @@ namespace WebImprenta
             }
         }
 
-       
+
         protected void MjeError(string mje)
         {
             limpiarModal();

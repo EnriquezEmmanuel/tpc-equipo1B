@@ -231,6 +231,15 @@ namespace WebImprenta
         protected global::System.Web.UI.UpdatePanel updPanelDetalles;
 
         /// <summary>
+        /// Control txtCopiasPorHoja.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCopiasPorHoja;
+
+        /// <summary>
         /// Control txtNumeroCopias.
         /// </summary>
         /// <remarks>

@@ -62,6 +62,7 @@ namespace WebImprenta.Paginas
 
                 Session.Add("Domicilio", ddlDomicilios.SelectedValue);
                 Session.Add("Repartidor", ddlRepartidor.SelectedValue);
+                Session["CostoEnvio"] = 1350;
                 Response.Redirect("PagePay.aspx");
             }
             else
@@ -78,6 +79,7 @@ namespace WebImprenta.Paginas
 
                 Session.Add("Domicilio", ddlDomicilios.SelectedValue);
                 Session.Add("Repartidor", DireccionLocal.Text);
+                Session["CostoEnvio"] = 0;
                 Response.Redirect("PagePay.aspx");
             }
             else

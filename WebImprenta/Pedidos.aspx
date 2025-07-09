@@ -64,6 +64,7 @@
             lblPrecioDetalles.textContent = "$" + precioDetalles.toFixed(2);
             lblSubtotal.textContent = "$" + subtotal.toFixed(2);
             hdnSubtotal.value = subtotal.toFixed(2).replace(".", ",");
+
         }
 
         function inicializarEventosSubtotal() {
@@ -95,7 +96,7 @@
         }
 
         function actualizarVistaPrevia() {
-            const copiasInput = document.getElementById('inputCopiasPorHoja');
+            const copiasInput = document.getElementById('<%= txtCopiasPorHoja.ClientID %>');
             const copiasPorHoja = parseInt(copiasInput?.value) || 1;
 
             const tamañoSelect = document.querySelector('[id$=ddlTamaño]');
@@ -225,9 +226,9 @@
             });
 
             root.addEventListener('input', function (e) {
-                if (e.target.id === 'inputCopiasPorHoja') {
-                    actualizarVistaPrevia();
-                }
+                if (e.target.id === '<%= txtCopiasPorHoja.ClientID %>') {
+                   actualizarVistaPrevia();
+               }
             });
 
             actualizarVistaPrevia();
@@ -409,7 +410,7 @@
 
                                     <div class="col-md-2 ms-5">
                                         <label class="form-label">Copias por hoja</label>
-                                        <input type="number" id="inputCopiasPorHoja" class="form-control" min="1" step="1" value="1" required />
+                                        <asp:TextBox ID="txtCopiasPorHoja" runat="server" Text="1" CssClass="form-control" type="number" min="1" step="1" />
                                         <div class="invalid-feedback">Ingrese una cantidad válida.</div>
                                     </div>
 
