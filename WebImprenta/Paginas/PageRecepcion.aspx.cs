@@ -25,57 +25,66 @@ namespace WebImprenta.Paginas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DevolverModal();
-            try
+            if (Session["usuario"] == null)
             {
-                PedidoNegocio pNegocio = new PedidoNegocio();
-                ListaPedidos = pNegocio.lista(); 
-                HojaNegocio hNegocio = new HojaNegocio();                
-                EstadoPedidoNegocio eNegocio = new EstadoPedidoNegocio();
-                ListaEstadoPedidos = eNegocio.lista();         
-
-
-                grillaPedidos.DataSource = ListaPedidos;
-                grillaPedidos.DataBind();
-
-                //if (!IsPostBack)
-                //{
-                //    PedidoNegocio pNegocio = new PedidoNegocio();
-                //    ListaPedidos = pNegocio.lista();
-
-                //    grillaPedidos.DataSource = ListaPedidos;
-                //    grillaPedidos.DataBind();
-
-                //    mensajeError.Text = ListaPedidos[0].NombreUsuario;
-                //}
-                int contPedidosInconclusos = 0;
-                if (!IsPostBack)
-                {
-                    foreach (var Pedido in ListaPedidos)
-                    {
-                        if (Pedido.Estado != "Listo.") contPedidosInconclusos++;
-                    }
-
-                    //---------- Modificación dinámica de la cantidad e pedidos inconclusos ----------
-                    if (contPedidosInconclusos == 0)
-                    {
-                        string script = "Id('divAdvertencia').style = 'opacity:0;' ";
-                        ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
-                    }
-                    else
-                    {
-                        string script = "Id('divAdvertencia').style = 'opacity:1;'; Id('divAdvertencia').innerHTML = " + contPedidosInconclusos + ";";
-                        ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
-                    }
-                    ////-----------------------------------------------------------------------------------
-
-                    foreach (var EstadoPedido in ListaEstadoPedidos)
-                    { ddlListaEstados.Items.Add(EstadoPedido.Descripcion); }
-                }
-
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+                return;
             }
-            catch (Exception ex)
-            { MjeError("Hubo un error en la carga de la página. Intentelo más tarde. Error: " + ex.Message); }
+            else
+            {
+                DevolverModal();
+                try
+                {
+                    PedidoNegocio pNegocio = new PedidoNegocio();
+                    ListaPedidos = pNegocio.lista();
+                    HojaNegocio hNegocio = new HojaNegocio();
+                    EstadoPedidoNegocio eNegocio = new EstadoPedidoNegocio();
+                    ListaEstadoPedidos = eNegocio.lista();
+
+
+                    grillaPedidos.DataSource = ListaPedidos;
+                    grillaPedidos.DataBind();
+
+                    //if (!IsPostBack)
+                    //{
+                    //    PedidoNegocio pNegocio = new PedidoNegocio();
+                    //    ListaPedidos = pNegocio.lista();
+
+                    //    grillaPedidos.DataSource = ListaPedidos;
+                    //    grillaPedidos.DataBind();
+
+                    //    mensajeError.Text = ListaPedidos[0].NombreUsuario;
+                    //}
+                    int contPedidosInconclusos = 0;
+                    if (!IsPostBack)
+                    {
+                        foreach (var Pedido in ListaPedidos)
+                        {
+                            if (Pedido.Estado != "Listo.") contPedidosInconclusos++;
+                        }
+
+                        //---------- Modificación dinámica de la cantidad e pedidos inconclusos ----------
+                        if (contPedidosInconclusos == 0)
+                        {
+                            string script = "Id('divAdvertencia').style = 'opacity:0;' ";
+                            ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
+                        }
+                        else
+                        {
+                            string script = "Id('divAdvertencia').style = 'opacity:1;'; Id('divAdvertencia').innerHTML = " + contPedidosInconclusos + ";";
+                            ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
+                        }
+                        ////-----------------------------------------------------------------------------------
+
+                        foreach (var EstadoPedido in ListaEstadoPedidos)
+                        { ddlListaEstados.Items.Add(EstadoPedido.Descripcion); }
+                    }
+
+                }
+                catch (Exception ex)
+                { MjeError("Hubo un error en la carga de la página. Intentelo más tarde. Error: " + ex.Message); }
+            }
         }
         
         protected void grillaPedidos_SelectedIndexChanged(object sender, EventArgs e)

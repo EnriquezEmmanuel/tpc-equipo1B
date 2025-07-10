@@ -40,7 +40,8 @@
 
                     <% }else{ %>
                         <a href="MiPerfil.aspx" class="txt-color-blanco-1">
-                            <span id="inicio-usuario" class="margen-right-2vw">Mi perfil</span>
+                            <!--<span id="inicio-usuario" class="margen-right-2vw">Mi perfil</span>-->
+                            <asp:Label ID="lblNombrePerfil" Text="" CssClass="margen-right-2vw" runat="server" />
                         </a>
                         <asp:ImageButton ID="Desloguear" runat="server" OnClick="Desloguear_Click" ImageUrl="~/imagenes/iconos/logout.png" CssClass="icono-logout" ToolTip="Desloguearse"/>
                     

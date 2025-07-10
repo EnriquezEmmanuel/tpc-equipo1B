@@ -32,12 +32,12 @@ namespace WebImprenta
             else
             {
                 Usuario User = (Usuario)Session["Usuario"];
-                ////// Usuario codeado reemplaza Session para pruebas
+                if (User?.DatosUsuario?.Nombre == null) //De esta forma consulta por cada capa
+                {
+                    Response.Redirect("~/Paginas/PageRegistry.aspx", false);
+                    Session["Advertencia"] = "Debe continuar con el registro para poder continuar.";
+                }
 
-                //UsuarioNegocio listaUsuariosXX = new UsuarioNegocio();
-                //Usuario User = listaUsuariosXX.listar().Find(x => x.Id == 1 );
-
-                //////
                 PedidoNegocio pNegocio = new PedidoNegocio();
                 List<Pedido> ListaPedidos = new List<Pedido>();
                 ListaPedidos = pNegocio.BuscarPedidos(User.Email);
@@ -62,31 +62,32 @@ namespace WebImprenta
                     }
                     //txtValidacion.Text = ListaPedidos[2].PrecioPedido.ToString();
                 }
-            }
-            if (!IsPostBack)
-            {
-                Usuario usuario = (Usuario)Session["usuario"];
 
-                if (usuario == null)
+                if (!IsPostBack)
                 {
-                    // Por seguridad, regresamos al login
-                    Response.Redirect("Login.aspx", false);
-                    return;
+                    Usuario usuario = (Usuario)Session["usuario"];
+
+                    if (usuario == null)
+                    {
+                        // Por seguridad, regresamos al login
+                        Response.Redirect("Login.aspx", false);
+                        return;
+                    }
+                    cargarSeleccionables();
+                    LimpiarArchivosTemporales();
+                    //CargarPedidos();
+
+                    txtNumeroCopias.Attributes["type"] = "number";
+                    txtNumeroCopias.Attributes["min"] = "1";
+                    txtNumeroCopias.Attributes["step"] = "1";
+
                 }
-                cargarSeleccionables();
-                LimpiarArchivosTemporales();
-                //CargarPedidos();
-
-                txtNumeroCopias.Attributes["type"] = "number";
-                txtNumeroCopias.Attributes["min"] = "1";
-                txtNumeroCopias.Attributes["step"] = "1";
-
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "recalcular", "setTimeout(calcularSubtotal, 100);", true);
+                }
+                DevolverModal();
             }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "recalcular", "setTimeout(calcularSubtotal, 100);", true);
-            }
-            DevolverModal();
         }
         private void cargarSeleccionables()
         {

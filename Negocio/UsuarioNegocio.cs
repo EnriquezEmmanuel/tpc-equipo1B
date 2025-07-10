@@ -38,11 +38,15 @@ namespace Negocio
                     int tipo = Convert.ToInt32(datos.Lector["TipoUsuario"]);
                     aux.TipoUsuario = tipo == 2 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
 
-                    long IdDatosUsuario = (long)datos.Lector["IdUsuarioDatos"];
-                    aux.DatosUsuario = ListaDatosUsuario.Find(x => x.Id == IdDatosUsuario);
+                    aux.DatosUsuario = null;
+                    if (!(datos.Lector["IdUsuarioDatos"] is DBNull))
+                    {
+                        long IdDatosUsuario = (long)datos.Lector["IdUsuarioDatos"];
+                        aux.DatosUsuario = ListaDatosUsuario.Find(x => x.Id == IdDatosUsuario);
+                    }
 
-
-                    aux.Direcciones = dNegocio.ListarDirecciones(aux.Id);
+                    if (!(dNegocio.ListarDirecciones(aux.Id) is null))
+                    { aux.Direcciones = dNegocio.ListarDirecciones(aux.Id); }
 
                     //aux.UsuarioDatos = (long)datos.Lector["UsuarioDatos"];
 
@@ -63,7 +67,7 @@ namespace Negocio
             try
             {
                 
-                datos.setearConsulta("SELECT Id, Email, Pass, TipoUsuario, IdUsuarioDatos FROM Usuario WHERE Email = @Email AND Pass = @Pass");
+                datos.setearConsulta("SELECT Id, Email, Pass, TipoUsuario, IdUsuarioDatos FROM Usuario WHERE Email = @Email AND Pass = @Pass AND EstadoSuscripcion=1");
                 datos.setearParametro("@Email", usuario.Email);
                 datos.setearParametro("@Pass", usuario.Pass);
 
@@ -81,10 +85,18 @@ namespace Negocio
                     int tipo = Convert.ToInt32(datos.Lector["TipoUsuario"]);
                     usuario.TipoUsuario = tipo == 2 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
 
-                    long IdDatosUsuario = (long)datos.Lector["IdUsuarioDatos"];
-                    usuario.DatosUsuario = ListaDatosUsuario.Find(x => x.Id == IdDatosUsuario);
+                    usuario.DatosUsuario = null;
+                    if (!(datos.Lector["IdUsuarioDatos"] is DBNull))
+                    {
+                        long IdDatosUsuario = (long)datos.Lector["IdUsuarioDatos"];
+                        usuario.DatosUsuario = ListaDatosUsuario.Find(x => x.Id == IdDatosUsuario);
+                    }
 
-                    usuario.Direcciones = dNegocio.ListarDirecciones(usuario.Id);
+                    usuario.Direcciones = null;
+                    if (!(dNegocio.ListarDirecciones(usuario.Id) is null))
+                    { usuario.Direcciones = dNegocio.ListarDirecciones(usuario.Id); }
+
+                    
 
                     return usuario;
                 }
@@ -107,7 +119,7 @@ namespace Negocio
             AccesoDatos datos2 = new AccesoDatos();
             try
             {
-                datos1.setearConsulta("SELECT Id FROM Usuario WHERE Email=@Email");
+                datos1.setearConsulta("SELECT Id FROM Usuario WHERE Email=@Email AND EstadoSuscripcion=1");
                 datos1.setearParametro("@Email", email);
 
                 datos1.ejecutarLectura();
@@ -135,30 +147,7 @@ namespace Negocio
                 datos2.cerrarConexion();
             }
         }
-
-        public int insertarNuevo(Usuario usuario)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                datos.setearProcedimiento("insertarNuevo");
-                datos.setearParametro("@Email", usuario.Email);
-                datos.setearParametro("@Pass", usuario.Pass);
-                datos.setearParametro("@TipoUsuario", usuario.TipoUsuario);
-                return datos.ejecutarAccionScalar();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-        
+    
         protected string AlfanuericoRandom(int longitud)
         {
             const string Caracteres = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789";
@@ -176,7 +165,7 @@ namespace Negocio
             AccesoDatos datos2 = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT Id FROM Usuario WHERE Email=@Email");
+                datos.setearConsulta("SELECT Id FROM Usuario WHERE Email=@Email AND EstadoSuscripcion=1");
                 datos.setearParametro("@Email", email);
 
                 datos.ejecutarLectura();
@@ -208,6 +197,31 @@ namespace Negocio
         }
 
         ////////////////////// desactualizado //////////////////
+
+
+        public int insertarNuevo(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("insertarNuevo");
+                datos.setearParametro("@Email", usuario.Email);
+                datos.setearParametro("@Pass", usuario.Pass);
+                datos.setearParametro("@TipoUsuario", usuario.TipoUsuario);
+                return datos.ejecutarAccionScalar();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public int validarEmail(string email)
         {
             AccesoDatos datos = new AccesoDatos();
