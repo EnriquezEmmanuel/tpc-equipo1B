@@ -34,7 +34,7 @@
 
                     <% if (Session["usuario"] == null){ %>
 
-                        <a href="InicioSesion.aspx" class="margen-right-2vw txt-color-blanco-1">
+                        <a href="<%= ResolveUrl("~/Paginas/PageEntry.aspx") %>" class="margen-right-2vw txt-color-blanco-1">
                             <span id="inicio-usuario" class="margen-right-2vw">Login</span>
                         </a>
 

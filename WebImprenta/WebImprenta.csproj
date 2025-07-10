@@ -155,14 +155,13 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="InicioSesion.aspx" />
     <Content Include="MiPerfil.aspx" />
     <Content Include="Paginas\PageCatalog.aspx" />
+    <Content Include="Paginas\PageEntry.aspx" />
     <Content Include="Paginas\PageLossPass.aspx" />
     <Content Include="Paginas\PagePay.aspx" />
     <Content Include="Paginas\PageRecepcion.aspx" />
     <Content Include="Paginas\PageRegistry.aspx" />
-    <Content Include="Paginas\PageSession.aspx" />
     <Content Include="Paginas\PageShipping.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="RecuperarContraseña.aspx" />
@@ -232,13 +231,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="InicioSesion.aspx.cs">
-      <DependentUpon>InicioSesion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="InicioSesion.aspx.designer.cs">
-      <DependentUpon>InicioSesion.aspx</DependentUpon>
-    </Compile>
     <Compile Include="MasterOperador.Master.cs">
       <DependentUpon>MasterOperador.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -259,6 +251,13 @@
     </Compile>
     <Compile Include="Paginas\PageCatalog.aspx.designer.cs">
       <DependentUpon>PageCatalog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PageEntry.aspx.cs">
+      <DependentUpon>PageEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageEntry.aspx.designer.cs">
+      <DependentUpon>PageEntry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\PageLossPass.aspx.cs">
       <DependentUpon>PageLossPass.aspx</DependentUpon>
@@ -287,13 +286,6 @@
     </Compile>
     <Compile Include="Paginas\PageRegistry.aspx.designer.cs">
       <DependentUpon>PageRegistry.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\PageSession.aspx.cs">
-      <DependentUpon>PageSession.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\PageSession.aspx.designer.cs">
-      <DependentUpon>PageSession.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\PageShipping.aspx.cs">
       <DependentUpon>PageShipping.aspx</DependentUpon>

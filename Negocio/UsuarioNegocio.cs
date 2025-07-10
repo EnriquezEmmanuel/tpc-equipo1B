@@ -74,7 +74,7 @@ namespace Negocio
                 ListaDatosUsuario = udNegocio.Listar();
                 DireccionNegocio dNegocio = new DireccionNegocio();
 
-                while (datos.Lector.Read())
+                if(datos.Lector.Read())
                 {
                     usuario.Id = Convert.ToInt32(datos.Lector["Id"]);
 
@@ -91,9 +91,9 @@ namespace Negocio
 
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
@@ -101,6 +101,40 @@ namespace Negocio
             }
         }
 
+        public string IngresarUsuarioNuevo(string email)
+        {
+            AccesoDatos datos1 = new AccesoDatos();
+            AccesoDatos datos2 = new AccesoDatos();
+            try
+            {
+                datos1.setearConsulta("SELECT Id FROM Usuario WHERE Email=@Email");
+                datos1.setearParametro("@Email", email);
+
+                datos1.ejecutarLectura();
+
+                if (!(datos1.Lector.Read()))
+                {
+                    string claveTemporal = AlfanuericoRandom(8);
+
+                    datos2.setearConsulta("INSERT INTO Usuario(Email, Pass, TipoUsuario) VALUES (@Email,@Clave,1)");
+                    datos2.setearParametro("@Email", email);
+                    datos2.setearParametro("@Clave", claveTemporal);
+                    datos2.ejecutarAccion();
+
+                    return claveTemporal;
+                }
+                else
+                { return null; }
+
+            }
+            catch (Exception)
+            { throw; }
+            finally
+            {
+                datos1.cerrarConexion();
+                datos2.cerrarConexion();
+            }
+        }
 
         public int insertarNuevo(Usuario usuario)
         {
@@ -124,53 +158,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public int validarEmail(string email)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                datos.setearProcedimiento("ValidarEmail");
-                datos.setearParametro("@Email", email);
-                int resultado = (int)datos.ejecutarAccionScalar();
-                return resultado;
-
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
-        public void actualizarContraseñaPorEmail(string email, string nuevaPass)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                datos.setearProcedimiento("recuperarContra");
-                datos.setearParametro("@Email", email);
-                datos.setearParametro("@Pass", nuevaPass);
-                datos.ejecutarAccion();
-
-
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
+        
         protected string AlfanuericoRandom(int longitud)
         {
             const string Caracteres = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789";
@@ -182,7 +170,7 @@ namespace Negocio
             }
             return new string(resultado);
         }
-        public string VerificarMail(string email)
+        public string ActualizarContraseña(string email)
         {
             AccesoDatos datos = new AccesoDatos();
             AccesoDatos datos2 = new AccesoDatos();
@@ -218,6 +206,55 @@ namespace Negocio
                 datos2.cerrarConexion();
             }
         }
+
+        ////////////////////// desactualizado //////////////////
+        public int validarEmail(string email)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("ValidarEmail");
+                datos.setearParametro("@Email", email);
+                int resultado = (int)datos.ejecutarAccionScalar();
+                return resultado;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void actualizarContraseñaPorEmail(string email, string nuevaPass)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("recuperarContra");
+                datos.setearParametro("@Email", email);
+                datos.setearParametro("@Pass", nuevaPass);
+                datos.ejecutarAccion();
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        
 
 
     }

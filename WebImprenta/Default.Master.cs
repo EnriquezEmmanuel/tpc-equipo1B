@@ -16,7 +16,7 @@ namespace WebImprenta
         protected void Desloguear_Click(object sender, EventArgs e)
         {
             Session.Clear();
-            Response.Redirect("InicioSesion.aspx", false);
+            Response.Redirect("~/Default.aspx", false);
         }
     }
 }

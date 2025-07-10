@@ -516,6 +516,9 @@ li {
 .margen-bottom-3vw {
     margin-bottom: 3vw;
 }
+.margen-bottom-5vw {
+    margin-bottom: 5vw;
+}
 
 .visible-sobre {
     opacity: 0;

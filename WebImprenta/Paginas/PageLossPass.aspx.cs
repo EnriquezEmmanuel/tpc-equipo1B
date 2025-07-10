@@ -32,7 +32,7 @@ namespace WebImprenta.Paginas
                 if (esValido)
                 {
                     UsuarioNegocio uNegocio = new UsuarioNegocio();
-                    string nuevaClave = uNegocio.VerificarMail(tbxEmail.Text);
+                    string nuevaClave = uNegocio.ActualizarContraseña(tbxEmail.Text);
                     if (nuevaClave != null)
                     {
                         string mensaje = "Nueva clave temporal: <strong>"+ nuevaClave;
