@@ -13,7 +13,15 @@ namespace WebImprenta
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            Usuario User = (Usuario)Session["Usuario"];
+            if (User?.DatosUsuario?.Nombre != null)
+            {
+                lblNombrePerfil.Visible = true;
+                lblNombrePerfil.Text = User.DatosUsuario.Nombre; 
+            } //Si da null pedir datos básicos de la cuenta
+            else {
+                lblNombrePerfil.Visible = false;
+            }
         }
         protected void Desloguear_Click(object sender, EventArgs e)
         {
