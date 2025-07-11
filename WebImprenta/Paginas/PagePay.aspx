@@ -10,7 +10,7 @@
 
             <div class="tablon-claro contenedor-v alineacion-centrado-centrado">
                 <h2 class="txt-familia-Rto txt-bold txt-1em3 entero">Pedido #<span id="txt-numero-pedido">00432119</span>	|	
-					
+
                     <asp:Label ID="lblMail" runat="server" />
 
                 </h2>

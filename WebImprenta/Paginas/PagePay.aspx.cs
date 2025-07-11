@@ -21,15 +21,14 @@ namespace WebImprenta.Paginas
                 return;
             }
 
-
             string BloquePagAnterior = Session["Domicilio"].ToString() + ", " + Session["Repartidor"].ToString();
             ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('" + BloquePagAnterior + "');", true);
 
             if (!IsPostBack)
             {
+
                 Usuario User = (Usuario)Session["Usuario"];
                 lblMail.Text = User.Email;
-
 
                 lblTamaño.Text = Session["Tamaño"]?.ToString();
                 lblTipoPapel.Text = Session["TipoPapel"]?.ToString();
