@@ -13,23 +13,23 @@ namespace WebImprenta
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["usuario"] == null)
-            //{
-            //    Session.Add("error", "Debes loguearte para ingresar");
-            //    Response.Redirect("Error.aspx", false);
-            //    return;
-            //}
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
             //////////////////////////////////////////////////////////
 
-            Usuario usuario = new Usuario();
-            UsuarioNegocio uNegocio = new UsuarioNegocio();
-            usuario = (uNegocio.listar()).Find(x=> x.Email == "chizorengo.@hotmail.com");
+            //Usuario usuario = new Usuario();
+            //UsuarioNegocio uNegocio = new UsuarioNegocio();
+            //usuario = (uNegocio.listar()).Find(x=> x.Email == "chizorengo.@hotmail.com");
 
             //////////////////////////////////////////////////////////
             if (!IsPostBack)
             {
-                //// Obtengo usuario de sesión con la misma clave
-                //Usuario usuario = (Usuario)Session["usuario"];
+                // Obtengo usuario de sesión con la misma clave
+                Usuario usuario = (Usuario)Session["usuario"];
 
 
                 if (usuario == null)

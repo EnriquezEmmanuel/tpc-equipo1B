@@ -58,46 +58,50 @@ namespace WebImprenta.Paginas
         }
 
 
-        //protected void btnPagar_Click(object sender, EventArgs e)
-        //{
-        //    try { 
-        //    decimal subtotal = Convert.ToDecimal(Session["Subtotal"] ?? 0);
-        //    decimal envio = Convert.ToDecimal(Session["CostoEnvio"] ?? 0);
-        //    decimal total = subtotal + envio;
+        protected void btnPagar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal subtotal = Convert.ToDecimal(Session["Subtotal"] ?? 0);
+                decimal envio = Convert.ToDecimal(Session["CostoEnvio"] ?? 0);
+                decimal total = subtotal + envio;
 
-        //    Preference preference = new Preference();
+                Preference preference = new Preference();
 
-        //    Item item = new Item()
-        //    {
-        //        Title = "Pedido de Impresion",
-        //        Quantity = 1,
-        //        CurrencyId = CurrencyId.ARS,
-        //        UnitPrice = total
-        //    };
+                Item item = new Item()
+                {
+                    Title = "Pedido de Impresion",
+                    Quantity = 1,
+                    CurrencyId = CurrencyId.ARS,
+                    UnitPrice = total
+                };
 
-        //    preference.Items.Add(item);
+                preference.Items.Add(item);
 
-        //        preference.BackUrls = new BackUrls()
-        //        {
-        //            Success = "https://tusitio.com/Paginas/Resultado.aspx?status=success",
-        //            Failure = "https://tusitio.com/Paginas/Resultado.aspx?status=failure",
-        //            Pending = "https://tusitio.com/Paginas/Resultado.aspx?status=pending"
-        //        };
+                preference.BackUrls = new BackUrls()
+                {
+                    Success = "https://tusitio.com/Paginas/Resultado.aspx?status=success",
+                    Failure = "https://tusitio.com/Paginas/Resultado.aspx?status=failure",
+                    Pending = "https://tusitio.com/Paginas/Resultado.aspx?status=pending"
+                };
 
-        //        preference.AutoReturn = AutoReturnType.approved;
-        //        preference.Save();
+                preference.AutoReturn = AutoReturnType.approved;
+                preference.Save();
 
-        //        Response.Redirect(preference.InitPoint);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Podés mostrar el error si querés
-        //        // lblError.Text = "Ocurrió un error al procesar el pago: " + ex.Message;
-        //    }
-        //}
-        
+                //Response.Redirect(preference.InitPoint); //Cuando funcione
+                Session["DatosMP"] = (Preference)preference;
+                Response.Redirect("PageMPfalsa.aspx");
 
-       
+            }
+            catch (Exception ex)
+            {
+                // Podés mostrar el error si querés
+                // lblError.Text = "Ocurrió un error al procesar el pago: " + ex.Message;
+            }
+        }
+
+
+
 
         protected void btnAprobar_Click1(object sender, EventArgs e)
         {
