@@ -19,7 +19,7 @@
 				GridLines="None" OnSelectedIndexChanged="grillaPedidos_SelectedIndexChanged" DataKeyNames="IdPedido">
 				<Columns >
 					
-					<asp:CommandField HeaderText="Selección" ShowSelectButton="true" SelectText="--&gt" ItemStyle-CssClass="visible-sobre"/>
+					<asp:CommandField HeaderText="Selección" ShowSelectButton="true" SelectText="--&gt" ItemStyle-CssClass="visible-sobre contenedor-h txt-color-resaltado-3 alineacion-centrado-centrado"/>
 					<asp:BoundField HeaderText="Nombre" DataField="NombreUsuario" />
 					<asp:BoundField HeaderText="Nro Pedido" DataField="IdPedido" />
 					<asp:BoundField HeaderText="Fecha" DataField="Fecha" />

@@ -25,84 +25,75 @@ namespace WebImprenta.Paginas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DevolverModal();
-            try
+            if (Session["usuario"] == null)
             {
-                PedidoNegocio pNegocio = new PedidoNegocio();
-                ListaPedidos = pNegocio.lista(); // g u a r d a r   e n   s e s i ó n
-                HojaNegocio hNegocio = new HojaNegocio();                
-                EstadoPedidoNegocio eNegocio = new EstadoPedidoNegocio();
-                ListaEstadoPedidos = eNegocio.lista(); // g u a r d a r   e n   s e s i ó n                
-
-
-                grillaPedidos.DataSource = ListaPedidos;
-                grillaPedidos.DataBind();
-
-                //if (!IsPostBack)
-                //{
-                //    PedidoNegocio pNegocio = new PedidoNegocio();
-                //    ListaPedidos = pNegocio.lista();
-
-                //    grillaPedidos.DataSource = ListaPedidos;
-                //    grillaPedidos.DataBind();
-
-                //    mensajeError.Text = ListaPedidos[0].NombreUsuario;
-                //}
-                int contPedidosInconclusos = 0;
-                if (!IsPostBack)
-                {
-                    foreach (var Pedido in ListaPedidos)
-                    {
-                        if (Pedido.Estado != "Listo.") contPedidosInconclusos++;
-                    }
-
-                    //---------- Modificación dinámica de la cantidad e pedidos inconclusos ----------
-                    if (contPedidosInconclusos == 0)
-                    {
-                        string script = "Id('divAdvertencia').style = style = 'opacity:0;' ";
-                        ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
-                    }
-                    else
-                    {
-                        string script = "Id('divAdvertencia').style = 'opacity:1;'; Id('divAdvertencia').innerHTML = " + contPedidosInconclusos + ";";
-                        ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
-                    }
-                    ////-----------------------------------------------------------------------------------
-
-                    foreach (var EstadoPedido in ListaEstadoPedidos)
-                    { ddlListaEstados.Items.Add(EstadoPedido.Descripcion); }
-                }
-
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+                return;
             }
-            catch (Exception ex)
-            { MjeError("Hubo un error en la carga de la página. Intentelo más tarde" + ex.ToString()); }
+            else
+            {
+                DevolverModal();
+                try
+                {
+                    PedidoNegocio pNegocio = new PedidoNegocio();
+                    ListaPedidos = pNegocio.lista();
+                    HojaNegocio hNegocio = new HojaNegocio();
+                    EstadoPedidoNegocio eNegocio = new EstadoPedidoNegocio();
+                    ListaEstadoPedidos = eNegocio.lista();
+
+
+                    grillaPedidos.DataSource = ListaPedidos;
+                    grillaPedidos.DataBind();
+
+                    //if (!IsPostBack)
+                    //{
+                    //    PedidoNegocio pNegocio = new PedidoNegocio();
+                    //    ListaPedidos = pNegocio.lista();
+
+                    //    grillaPedidos.DataSource = ListaPedidos;
+                    //    grillaPedidos.DataBind();
+
+                    //    mensajeError.Text = ListaPedidos[0].NombreUsuario;
+                    //}
+                    int contPedidosInconclusos = 0;
+                    if (!IsPostBack)
+                    {
+                        foreach (var Pedido in ListaPedidos)
+                        {
+                            if (Pedido.Estado != "Listo.") contPedidosInconclusos++;
+                        }
+
+                        //---------- Modificación dinámica de la cantidad e pedidos inconclusos ----------
+                        if (contPedidosInconclusos == 0)
+                        {
+                            string script = "Id('divAdvertencia').style = 'opacity:0;' ";
+                            ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
+                        }
+                        else
+                        {
+                            string script = "Id('divAdvertencia').style = 'opacity:1;'; Id('divAdvertencia').innerHTML = " + contPedidosInconclusos + ";";
+                            ClientScript.RegisterStartupScript(this.GetType(), "Advertencia", script, true);
+                        }
+                        ////-----------------------------------------------------------------------------------
+
+                        foreach (var EstadoPedido in ListaEstadoPedidos)
+                        { ddlListaEstados.Items.Add(EstadoPedido.Descripcion); }
+                    }
+
+                }
+                catch (Exception ex)
+                { MjeError("Hubo un error en la carga de la página. Intentelo más tarde. Error: " + ex.Message); }
+            }
         }
-        protected void MjeError(string mje)
-        {
-            limpiarModal();
-            TextoModal.Text = mje;
-        }
-        protected void limpiarModal()
-        {
-            string script = "Id('ventana-modal').style = 'display:flex;';";
-            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
-            ddlListaEstados.Style["display"] = "none";
-            btnAceptarModal.Style["display"] = "none";
-        }
-        protected void DevolverModal()
-        {
-            string script = "Id('ventana-modal').style = 'display:none;';";
-            ClientScript.RegisterStartupScript(this.GetType(), "devolver", script, true);
-            ddlListaEstados.Style["display"] = "flex";
-            btnAceptarModal.Style["display"] = "flex";
-        }
+        
         protected void grillaPedidos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 DevolverModal();
 
-                int IdPedidoSeleccionado = (int)grillaPedidos.SelectedDataKey.Value;
+                long IdPedidoSeleccionado = (long)grillaPedidos.SelectedDataKey.Value;
                 PedidoSeleccionado = ListaPedidos.Find(x => x.IdPedido == IdPedidoSeleccionado);
                 //----------- Id para cambiar el estado -----------
                 TextoModal.Text = PedidoSeleccionado.NombreUsuario;
@@ -124,7 +115,7 @@ namespace WebImprenta.Paginas
                     lblMargen.Text = "Si";
                 else
                     lblMargen.Text = "No";
-                lblPreciPedido.Text = PedidoSeleccionado.PrecioPedido.ToString();
+                lblPreciPedido.Text = "$" + PedidoSeleccionado.PrecioPedido.ToString("F2");
 
                 MensajesNegocio mNegocio = new MensajesNegocio();
                 ListaMensajes = mNegocio.listar();
@@ -138,14 +129,11 @@ namespace WebImprenta.Paginas
 
                     switch (item.TipoUsuario)
                     {
-                        case "Operador":
-                            ContenedorMensajes.InnerHtml += "<div class=\"margen-bottom-1vw margen-left-5vw txt-oblique txt-color-blanco-1 entero\"><span class=\"txt-bold-oblique  txt-color-resaltado-1\">" + item.Nombre + "(Operador/a)</span> <span class=\"txt-oblique  txt-color-blanco-2\">" + item.Fecha + "</span><br>" + item.Mensaje + "</div>";
-                            break;
-                        case "Encargado":
-                            ContenedorMensajes.InnerHtml += "<div class=\"margen-bottom-1vw margen-left-5vw txt-oblique txt-color-blanco-1 entero\"><span class=\"txt-bold-oblique  txt-color-resaltado-3\">" + item.Nombre + "(Encargado/a)</span> <span class=\"txt-oblique  txt-color-blanco-2\">" + item.Fecha + "</span><br>" + item.Mensaje + "</div>";
-                            break;
-                        default:
+                        case 1:
                             ContenedorMensajes.InnerHtml += "<div class=\"margen-bottom-1vw txt-oblique txt-color-blanco-1 entero\"><span class=\"txt-bold-oblique  txt-color-resaltado-2\">" + item.Nombre + "</span> <span class=\"txt-oblique  txt-color-blanco-2\">" + item.Fecha + "</span><br>" + item.Mensaje + "</div>";
+                            break;
+                        case 2:
+                            ContenedorMensajes.InnerHtml += "<div class=\"margen-bottom-1vw margen-left-5vw txt-oblique txt-color-blanco-1 entero\"><span class=\"txt-bold-oblique  txt-color-resaltado-1\">" + item.Nombre + "(Operador/a)</span> <span class=\"txt-oblique  txt-color-blanco-2\">" + item.Fecha + "</span><br>" + item.Mensaje + "</div>";
                             break;
                     }
                 }
@@ -157,8 +145,8 @@ namespace WebImprenta.Paginas
                 //"<p>"+ Server.HtmlEncode(TextoC) + "</p>";
 
             }
-            catch (Exception)
-            { MjeError("Surgió un problema en la selección del pedido. Intentelo más tarde"); }
+            catch (Exception ex)
+            { MjeError("Surgió un problema en la selección del pedido. Intentelo más tarde. Error: "+ex.ToString()); }
 
         }
 
@@ -180,11 +168,11 @@ namespace WebImprenta.Paginas
                 else
                 {
                     limpiarModal();
-                    TextoModal.Text = "Debe seleccionar un pedido.";
+                    TextoModal.Text = "Debe seleccionar un estado para el pedido.";
                 }
             }
-            catch (Exception)
-            { MjeError("Surgio un problema al itentar cambiar el estado. Intentelo más tarde"); }
+            catch (Exception ex)
+            { MjeError("Surgio un problema al itentar cambiar el estado. Intentelo más tarde. Error: " + ex.Message); }
         }
 
         protected void EnviarMensaje_Click(object sender, EventArgs e)
@@ -206,8 +194,29 @@ namespace WebImprenta.Paginas
                 }
                 MensajeAenviar.Text = "";
             }
-            catch (Exception)
-            { MjeError("No se pudo enviar el mensaje. Intentelo más tarde"); }
+            catch (Exception ex)
+            { MjeError("No se pudo enviar el mensaje. Intentelo más tarde. Error: " + ex.Message); }
+        }
+
+        //////////////////////// Mensajes de error ///////////////////////////////////
+        protected void MjeError(string mje)
+        {
+            limpiarModal();
+            TextoModal.Text = mje;
+        }
+        protected void limpiarModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:flex;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
+            ddlListaEstados.Style["display"] = "none";
+            btnAceptarModal.Style["display"] = "none";
+        }
+        protected void DevolverModal()
+        {
+            string script = "Id('ventana-modal').style = 'display:none;';";
+            ClientScript.RegisterStartupScript(this.GetType(), "devolver", script, true);
+            ddlListaEstados.Style["display"] = "flex";
+            btnAceptarModal.Style["display"] = "flex";
         }
     }
 }

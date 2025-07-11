@@ -13,5 +13,12 @@ namespace WebImprenta
         {
 
         }
+       
+
+        protected void Desloguear_Click(object sender, ImageClickEventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("~/Default.aspx", false);
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebImprenta.Paginas
 {
-    public partial class PageSession : System.Web.UI.Page
+    public partial class PageCatalog : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

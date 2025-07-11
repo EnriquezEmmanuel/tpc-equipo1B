@@ -7,7 +7,7 @@
 			<h2>Donde tus ideas toman forma… y papel.</h2>
 		</div>
 		<div class="tablon-oscuro contenedor-h alineacion-centrado-centrado">
-			<img src="imagenes/portfolio-pequeño-formato.jpg" class="imagen-300-px">
+			<img src="imagenes/portfolio-tarjetas.jpg" class="imagen-300-px">
 			<p class="alineacion-centrado-centrado medio">
 			En Print360 ofrecemos un servicio integral de impresión en línea, ideal tanto para quienes necesitan tiradas pequeñas como para grandes volúmenes. Imprimí desde la comodidad de tu casa o empresa y recibí productos de alta calidad en tiempo récord.
 			</p>			

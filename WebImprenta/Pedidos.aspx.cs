@@ -19,7 +19,8 @@ namespace WebImprenta
 {
     public partial class Pedidos : System.Web.UI.Page
     {
-        public List<Usuario> ListaUsuarios { get; set; }
+        //public List<Usuario> ListaUsuarios {get;set;}
+        public string Email { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
@@ -28,29 +29,64 @@ namespace WebImprenta
                 Response.Redirect("Error.aspx", false);
                 return;
             }
-            if (!IsPostBack)
-            {
-                Usuario usuario = (Usuario)Session["usuario"];
-
-                if (usuario == null)
-                {
-                    // Por seguridad, regresamos al login
-                    Response.Redirect("Login.aspx", false);
-                    return;
-                }
-                cargarSeleccionables();
-                LimpiarArchivosTemporales();
-                CargarPedidos();
-
-                txtNumeroCopias.Attributes["type"] = "number";
-                txtNumeroCopias.Attributes["min"] = "1";
-                txtNumeroCopias.Attributes["step"] = "1";
-            }
             else
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "recalcular", "setTimeout(calcularSubtotal, 100);", true);
+                Usuario User = (Usuario)Session["Usuario"];
+                if (User?.DatosUsuario?.Nombre == null) //De esta forma consulta por cada capa
+                {
+                    Response.Redirect("~/Paginas/PageRegistry.aspx", false);
+                    Session["Advertencia"] = "Debe continuar con el registro para poder continuar.";
+                }
+
+                PedidoNegocio pNegocio = new PedidoNegocio();
+                List<Pedido> ListaPedidos = new List<Pedido>();
+                ListaPedidos = pNegocio.BuscarPedidos(User.Email);
+
+                if (ListaPedidos.Count != 0)    // valida si está vacía la lista
+                {
+                    ContenedorPedidos.InnerHtml = "";
+                    string margenes = "";
+                    foreach (var item in ListaPedidos)
+                    {
+                        if (item.Margenes) margenes = "Si"; else margenes = "No";
+                        ContenedorPedidos.InnerHtml += "<div class=\"tablon-claro contenedor-v alineacion-centrado-centrado entero txt-em9\">" +
+                            "<h2 class=\"txt-familia-Rto txt-bold txt-1em3 entero\">Pedido #<span id=\"txt-numero-pedido\">" + item.IdPedido.ToString() + "</span>	|	<span>" + item.NombreUsuario + "</span>	|	<span id=\"txt-estado-pedido\" class=\"txt-normal txt-familia-Rto-Slab\">" + item.Estado + "</span></h2>" +
+                            "<div class=\"contenedor-h alineacion-around-inicio entero \">" +
+                            "<div><h3>Hoja</h3><ul><li class=\"margen-bottom-0em3\">Tamaño: " + item.Hoja.Tamaño + "</li><li class=\"margen-bottom-0em3\">Tipo:" + item.Hoja.TipoPapel + "</li><li class=\"margen-bottom-0em3\">Gramaje: " + item.Hoja.Gramaje + "</li></ul></div>" +
+                            "<div><h3>Calidad</h3><ul><li class=\"margen-bottom-0em3\">" + item.Calidad.Color + "</li><li class=\"margen-bottom-0em3\">" + item.Calidad.Tipo + "</li></ul></div>" +
+                            "<div><h3>Detalles de <br>impresión</h3><ul><li class=\"margen-bottom-0em3\">Copias por hoja: " + item.CopiaPorHoja.ToString() + "</li><li class=\"margen-bottom-0em3\">Cantidad de copias: " + item.Copias.ToString() + "</li><li class=\"margen-bottom-0em3\">Margen (2mm): " + margenes + "</li></ul></div>" +
+                            "<div class=\"contenedor-v alineacion-final-inicio\"><h3>Precio</h3><p> $" + item.PrecioPedido.ToString("F2") + "</p><h3>Envío</h3><p>$1000</p></div>" +
+                            "</div></div>";
+
+                    }
+                    //txtValidacion.Text = ListaPedidos[2].PrecioPedido.ToString();
+                }
+
+                if (!IsPostBack)
+                {
+                    Usuario usuario = (Usuario)Session["usuario"];
+
+                    if (usuario == null)
+                    {
+                        // Por seguridad, regresamos al login
+                        Response.Redirect("Login.aspx", false);
+                        return;
+                    }
+                    cargarSeleccionables();
+                    LimpiarArchivosTemporales();
+                    //CargarPedidos();
+
+                    txtNumeroCopias.Attributes["type"] = "number";
+                    txtNumeroCopias.Attributes["min"] = "1";
+                    txtNumeroCopias.Attributes["step"] = "1";
+
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "recalcular", "setTimeout(calcularSubtotal, 100);", true);
+                }
+                DevolverModal();
             }
-            DevolverModal();
         }
         private void cargarSeleccionables()
         {
@@ -229,13 +265,11 @@ namespace WebImprenta
                 Session["DobleCara"] = ddlDobleCara.SelectedValue;
 
 
-                string copiasPorHoja = Request.Form["inputCopiasPorHoja"];
-                string numeroCopias = Request.Form["txtNumeroCopias"];
                 string margen = ddlMargen.SelectedValue;
                 string posicion = ddlPosicion.SelectedValue;
 
-                Session["CopiasPorHoja"] = copiasPorHoja;
-                Session["NumeroCopias"] = numeroCopias;
+                Session["CopiasPorHoja"] = txtCopiasPorHoja.Text;
+                Session["NumeroCopias"] = txtNumeroCopias.Text;
                 Session["Margen"] = margen;
                 Session["Posicion"] = posicion;
 
@@ -245,7 +279,7 @@ namespace WebImprenta
 
                 if (guardadoCorrectamente)
                 {
-                    // Aca tiene que Redirigir a pagina envios
+                    Response.Redirect("Paginas/PageShipping");
                 }
                 else
                 {
@@ -299,6 +333,9 @@ namespace WebImprenta
             {
                 hdnUrlImagenSubida.Value = "";
             }
+
+
+
         }
         private string ProcesarArchivo(HttpPostedFile archivoSubido, string enlace, out string mensaje)
         {
@@ -505,38 +542,7 @@ namespace WebImprenta
             }
         }
 
-        private void CargarPedidos()
-        {
-            PedidoNegocio pNegocio = new PedidoNegocio();
-            List<Pedido> ListaPedidos = new List<Pedido>();
 
-            Usuario usuario = (Usuario)Session["usuario"];
-
-            try
-            {
-                ListaPedidos = pNegocio.BuscarPedidos(usuario.Email);
-
-                ContenedorPedidos.InnerHtml = "";
-                string margenes = "";
-
-                foreach (var item in ListaPedidos)
-                {
-                    margenes = item.Margenes ? "Sí" : "No";
-
-                    ContenedorPedidos.InnerHtml += "<div class=\"tablon-claro\">" +
-                        "<h2 class=\"txt-familia-Rto txt-bold txt-1em3 entero\">Pedido #<span id=\"txt-numero-pedido\">" + item.IdPedido + "</span> | <span>"/* + item.NombreUsuario*/ + "</span> | <span id=\"txt-estado-pedido\" class=\"txt-normal txt-familia-Rto-Slab\">" + item.Estado + "</span></h2>" +
-                        "<div class=\"cuarto\"><h3>Hoja</h3><ul><li>Tamaño: " + item.Hoja.Tamaño + "</li><li>Tipo: " + item.Hoja.TipoPapel + "</li><li>Gramaje: " + item.Hoja.Gramaje + "</li></ul></div>" +
-                        "<div class=\"cuarto\"><h3>Calidad</h3><ul><li>" + item.Calidad.Color + "</li><li>" + item.Calidad.Tipo + "</li><li>Simple</li></ul></div>" +
-                        "<div class=\"cuarto\"><h3>Detalles</h3><ul><li>Copias por hoja: " + item.CopiaPorHoja + "</li><li>Cantidad: " + item.Copias + "</li><li>Margen (2mm): " + margenes + "</li></ul></div>" +
-                        "<div class=\"cuarto contenedor-v alineacion-inicio-centrado\"><h3>Precio</h3><p>$" + item.PrecioPedido + "</p><h3>Envío</h3><p>$1000</p></div>" +
-                        "</div>";
-                }
-            }
-            catch (Exception ex)
-            {
-                MjeError("Hubo un error al cargar los pedidos. Intentelo más tarde.<br>Error: " + ex.Message);
-            }
-        }
         protected void MjeError(string mje)
         {
             limpiarModal();

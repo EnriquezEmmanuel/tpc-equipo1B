@@ -15,8 +15,8 @@ namespace Negocio
             try
             {
                 datos.setearProcedimiento("InsertarDireccion");
-                datos.setearParametro("@Id", IdUser);
-                datos.setearParametro("@Direccion", direccion.Calle);
+                datos.setearParametro("@IdUsuarioDatos", IdUser);
+                datos.setearParametro("@Calle", direccion.Calle);
                 datos.setearParametro("@Altura", direccion.Altura);
                 datos.setearParametro("@Departamento", direccion.Departamento);
                 datos.setearParametro("@Piso", direccion.Piso);
@@ -41,7 +41,9 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("FiltrarDireccionPorUsuario");
+                //datos.setearProcedimiento("FiltrarDireccionPorUsuario");
+                datos.setearProcedimiento("FiltrarDireccionPorIdUsuario");
+                //datos.setearParametro("@IdUsuarioDatos", IdUser);
                 datos.setearParametro("@Id", IdUser);
                 datos.ejecutarLectura();
 
@@ -49,7 +51,44 @@ namespace Negocio
                 {
                     Direccion aux = new Direccion();
                     aux.Id = Convert.ToInt32(datos.Lector["IDDireccion"]);
-                    aux.Calle = datos.Lector["Direccion"].ToString();
+                    aux.Calle = datos.Lector["Calle"].ToString();
+                    aux.Altura = datos.Lector["Altura"].ToString();
+                    aux.Departamento = datos.Lector["Departamento"].ToString();
+                    aux.Piso = datos.Lector["Piso"].ToString();
+                    aux.CodPostal = datos.Lector["CodPostal"] != DBNull.Value ? Convert.ToInt32(datos.Lector["CodPostal"]) : 0;
+                    aux.Ciudad = datos.Lector["Ciudad"].ToString();
+                    aux.Activo = Convert.ToBoolean(datos.Lector["Activo"]);
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public List<Direccion> ListarDirecciones()
+        {
+            List<Direccion> lista = new List<Direccion>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                
+                datos.setearConsulta("SELECT IDDireccion, Calle, Altura, Departamento, Piso, CodPostal, Ciudad, Activo FROM Direccion");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Direccion aux = new Direccion();
+                    aux.Id = Convert.ToInt32(datos.Lector["IDDireccion"]);
+                    aux.Calle = datos.Lector["Calle"].ToString();
                     aux.Altura = datos.Lector["Altura"].ToString();
                     aux.Departamento = datos.Lector["Departamento"].ToString();
                     aux.Piso = datos.Lector["Piso"].ToString();

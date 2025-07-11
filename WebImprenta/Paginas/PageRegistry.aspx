@@ -1,18 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PageRegistry.aspx.cs" Inherits="WebImprenta.Paginas.PageRegistry" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Registro</title>
-	<link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Content/estilos-propios.css") %>"/>
-	<link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Content/estilos-prefijados-propios.css") %>"/>
-	
-</head>
-<body>
-    <form id="form1" runat="server">
-        <section class="Secciones contenedor-v" >
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="PageRegistry.aspx.cs" Inherits="WebImprenta.Paginas.PageRegistry" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+	<script type="text/javascript" src="../Scripts/CompotamientoGenerico.js"></script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <section class="Secciones contenedor-v" >
 		<h1 class="titular-h2 margen-left-2vw">Registro</h1>
 			<h3 class="contenedor-h alineacion-inicial-centrado margen-top-2vw">¡Solo un paso más! Completá los siguientes datos para poder completar el registro.</h2>
 		<div class="contenedor-h">
@@ -84,13 +75,9 @@
 	
 	
 	<section id="ventana-modal">
-		<p id="texto-modal">Esto es un texto modal: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua.</p>
-		<div class="contenedor-h alineacion-centrado-final">
-			<button class="boton-formulario" id="aceptar-modal">Aceptar</button>
-			<button class="boton-formulario" id="cancelar-modal">Cancelar</button>
-		</div>
+		<asp:Label Text="" runat="server" ID="TextoModal"/>
+			<div class="contenedor-h alineacion-centrado-final">
+				<button class="boton-formulario" id="cancelar-modal">Aceptar</button>
+			</div>
 	</section>
-    </form>
-</body>
-</html>
+</asp:Content>

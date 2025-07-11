@@ -23,7 +23,6 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,8 +43,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>..\packages\BouncyCastle.Cryptography.2.6.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
@@ -126,8 +125,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -155,11 +154,14 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="InicioSesion.aspx" />
     <Content Include="MiPerfil.aspx" />
+    <Content Include="Paginas\PageCatalog.aspx" />
+    <Content Include="Paginas\PageEntry.aspx" />
+    <Content Include="Paginas\PageLossPass.aspx" />
+    <Content Include="Paginas\PagePay.aspx" />
     <Content Include="Paginas\PageRecepcion.aspx" />
     <Content Include="Paginas\PageRegistry.aspx" />
-    <Content Include="Paginas\PageSession.aspx" />
+    <Content Include="Paginas\PageShipping.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="RecuperarContraseña.aspx" />
     <Content Include="Registro.aspx" />
@@ -228,13 +230,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="InicioSesion.aspx.cs">
-      <DependentUpon>InicioSesion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="InicioSesion.aspx.designer.cs">
-      <DependentUpon>InicioSesion.aspx</DependentUpon>
-    </Compile>
     <Compile Include="MasterOperador.Master.cs">
       <DependentUpon>MasterOperador.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -248,6 +243,34 @@
     </Compile>
     <Compile Include="MiPerfil.aspx.designer.cs">
       <DependentUpon>MiPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PageCatalog.aspx.cs">
+      <DependentUpon>PageCatalog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageCatalog.aspx.designer.cs">
+      <DependentUpon>PageCatalog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PageEntry.aspx.cs">
+      <DependentUpon>PageEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageEntry.aspx.designer.cs">
+      <DependentUpon>PageEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PageLossPass.aspx.cs">
+      <DependentUpon>PageLossPass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageLossPass.aspx.designer.cs">
+      <DependentUpon>PageLossPass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\PagePay.aspx.cs">
+      <DependentUpon>PagePay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PagePay.aspx.designer.cs">
+      <DependentUpon>PagePay.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\PageRecepcion.aspx.cs">
       <DependentUpon>PageRecepcion.aspx</DependentUpon>
@@ -263,12 +286,12 @@
     <Compile Include="Paginas\PageRegistry.aspx.designer.cs">
       <DependentUpon>PageRegistry.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\PageSession.aspx.cs">
-      <DependentUpon>PageSession.aspx</DependentUpon>
+    <Compile Include="Paginas\PageShipping.aspx.cs">
+      <DependentUpon>PageShipping.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\PageSession.aspx.designer.cs">
-      <DependentUpon>PageSession.aspx</DependentUpon>
+    <Compile Include="Paginas\PageShipping.aspx.designer.cs">
+      <DependentUpon>PageShipping.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pedidos.aspx.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>

@@ -215,10 +215,6 @@ td {
     margin-left: 2em;
 }
 
-#icono-logout {
-    width: 2em;
-    align-self: center;
-}
 
 #TextoModal {
     visibility: hidden;

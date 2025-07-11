@@ -18,53 +18,60 @@
     <form id="form1" runat="server">
         <div class="conteiner-fluid">
             <section id="menu-usuario">
-                <div id="menu">
+                <div id="menu" class="contenedor-h">
                     <ul>
                         <li><a href="<%= ResolveUrl("~/Default.aspx") %>">Inicio</a></li>
-                        <%--<li><a href="Paginas/PageSession.aspx">Login</a></li>--%>
-                        <li><a href="<%= ResolveUrl("~/Pedidos.aspx") %>">Pedidos<div class="adv-numerica alineacion-centrado-centrado">3</div>
-                        </a></li>
-                        <li><a href="">Catalogo de productos</a></li>
+
+                         <%if (Session["usuario"] != null){ %>
+                            <li><a href="<%= ResolveUrl("~/Pedidos.aspx") %>">Pedidos</a></li>
+                        <% } %>
+
+                        <li><a href="<%= ResolveUrl("~/Paginas/PageCatalog.aspx") %>">Catalogo de productos</a></li>
                     </ul>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="d-flex align-items-center justify-content-end">
-                        <a href="MiPerfil.aspx" class="nav-link text-light me-3">
-                            <i class="fas fa-user"></i>Mi perfil
+                <div class="contenedor-h alineacion-final-centrado margen-right-2vw" id="caja-usuario">
+
+                    <% if (Session["usuario"] == null){ %>
+
+                        <a href="<%= ResolveUrl("~/Paginas/PageEntry.aspx") %>" class="margen-right-2vw txt-color-blanco-1">
+                            <span id="inicio-usuario" class="margen-right-2vw">Login</span>
                         </a>
-                        <a class="nav-link text-light me-3" runat="server" href="~/Carrito">🛒</a>
-                        <%if (Session["usuario"] == null)
-                            { %>
-                        <a href="InicioSesion.aspx" class="btn btn-primary">Login</a>
-                        <%}
-                        else
-                        { %>
-                        <asp:Button Text="Salir" ID="btnSalir"
-                            CssClass="btn btn-outline-light"
-                            OnClick="btnSalir_Click" runat="server" />
-                        <%} %>
-                    </div>
-                </div>
+
+                    <% }else{ %>
+
+                        <a href="<%= ResolveUrl("~/MiPerfil.aspx") %>" class="txt-color-blanco-1">
+
+                            <!--<span id="inicio-usuario" class="margen-right-2vw">Mi perfil</span>-->
+                            <asp:Label ID="lblNombrePerfil" Text="" CssClass="margen-right-2vw" runat="server" />
+                        </a>
+                        <asp:ImageButton ID="Desloguear" runat="server" OnClick="Desloguear_Click" ImageUrl="~/imagenes/iconos/logout.png" CssClass="icono-logout" ToolTip="Desloguearse"/>
+                    
+                    <% } %>
+		        </div>
             </section>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
 
         </div>
         <footer>
-            <div class="contenedor-v medio alineacion-inicio-centrado">
+            <div class="contenedor-v medio alineacion-inicio-inicio">
 
-                <div class="contenedor-v alineacion-inicio-inicio">
-                    <h3>Seguinos</h3>
-                    <a href="">@Print360</a>
-                    <a href="">Print360</a>
+                <div class="contenedor-v alineacion-inicio-inicio margen-left-5vw">
+                    <h3>Contactanos</h3>
+                    <a href="" class="contenedor-h alineacion-inicio-final margen-bottom-0em6">
+                        <asp:Image runat="server" CssClass="imagen-icono-footer-30px" ImageUrl="~/imagenes/iconos/instagram.png" />@Print360</a>
+                    <div class="contenedor-h alineacion-inicio-final margen-bottom-0em6 txt-color-resaltado-2 txt-1em3">
+                        <asp:Image runat="server" CssClass="imagen-icono-footer-30px" ImageUrl="~/imagenes/iconos/whatsapp.png" />11-9458-1023</div>
                 </div>
             </div>
-            <div class="contenedor-v medio alineacion-inicio-centrado">
-                <div class="contenedor-v alineacion-inicio-inicio">
+            <div class="contenedor-v medio alineacion-inicio-inicio">
+                <div class="contenedor-v alineacion-inicio-inicio margen-left-5vw">
                     <h3>Encontranos</h3>
-                    <a href="">Recepcion@Print360.com</a>
-                    <a href="">Av. Marquez 123, San Isidro.</a>
+                    <a href="" class="contenedor-h alineacion-inicio-final margen-bottom-0em6">
+                        <asp:Image runat="server" CssClass="imagen-icono-footer-30px" ImageUrl="~/imagenes/iconos/mail.png" />recepcion@print360.com</a>
+                    <a href="" class="contenedor-h alineacion-inicio-final margen-bottom-0em6">
+                        <asp:Image runat="server" CssClass="imagen-icono-footer-30px" ImageUrl="~/imagenes/iconos/maps.png" />Av. Marquez 123, San Isidro.</a>
                 </div>
             </div>
         </footer>

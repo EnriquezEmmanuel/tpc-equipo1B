@@ -11,7 +11,7 @@ namespace WebImprenta.Paginas
 {
 
 
-    public partial class PageSession
+    public partial class PageCatalog
     {
     }
 }
