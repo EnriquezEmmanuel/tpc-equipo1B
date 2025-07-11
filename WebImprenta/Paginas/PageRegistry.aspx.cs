@@ -6,31 +6,41 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using Dominio;
+using Negocio;
 
 namespace WebImprenta.Paginas
 {
     public partial class PageRegistry : System.Web.UI.Page
     {
+        protected bool Inicio;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] == null)
-            {
-                Session.Add("error", "Debes loguearte para ingresar");
-                Response.Redirect("Error.aspx", false);
-                return;
-            }
-            else
-            {
-                if (!IsPostBack)
-                {
-                    var advertencia = Session["Advertencia"] as string;
-                    if (!string.IsNullOrEmpty(advertencia))
-                    {
-                        MjeError(advertencia);
-                    }
-                }
-                Usuario User = (Usuario)Session["Usuario"];
-            }
+            //Inicio = true;
+
+            //if (Session["usuario"] == null)
+            //{
+            //    Session.Add("error", "Debes loguearte para ingresar");
+            //    Response.Redirect("Error.aspx", false);
+            //    return;
+            //}
+            //else
+            //{
+            //    if (!IsPostBack)
+            //    {
+            //        var advertencia = Session["Advertencia"] as string;
+            //        if (!string.IsNullOrEmpty(advertencia))
+            //        {
+            //            MjeError(advertencia);
+            //            Inicio = false;
+            //        }
+            //    }
+            //    Usuario User = (Usuario)Session["Usuario"];
+            //}
+
+            //////////////////////////////////////////////////////////
+            
+            /////////////////////////////////////////////////////////
+
         }
         protected void MjeError(string mje)
         {

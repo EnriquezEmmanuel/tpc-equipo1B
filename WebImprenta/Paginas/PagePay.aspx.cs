@@ -26,8 +26,8 @@ namespace WebImprenta.Paginas
                 return;
             }
 
-            string BloquePagAnterior = Session["Domicilio"].ToString() + ", " + Session["Repartidor"].ToString();
-            ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('" + BloquePagAnterior + "');", true);
+            //string BloquePagAnterior = Session["Domicilio"].ToString() + ", " + Session["Repartidor"].ToString();
+            //ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('" + BloquePagAnterior + "');", true);
 
             if (!IsPostBack)
             {

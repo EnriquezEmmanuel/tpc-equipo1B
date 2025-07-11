@@ -9,11 +9,8 @@
             <h2>Finalizá el pago</h2>
 
             <div class="tablon-claro contenedor-v alineacion-centrado-centrado">
-                <h2 class="txt-familia-Rto txt-bold txt-1em3 entero">Pedido #<span id="txt-numero-pedido">00432119</span>	|	
-
-                    <asp:Label ID="lblMail" runat="server" />
-
-                </h2>
+                <h2 class="txt-familia-Rto txt-bold txt-1em3 entero">Pedido de <asp:Label ID="lblMail" runat="server" /><asp:Label ID="Label1" Text="" runat="server" /></h2>
+                 <!-- ex  ID="txt-numero-pedido" -->
                 <div class="tablon-claro alineacion-around-inicio ">
 
                     <div class="">

@@ -225,8 +225,9 @@ td {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+/*---------- nuevo ----------*/
+#NumPedido{}
 /*---------- fin nuevo ----------*/
-
 .adv-numerica {
     display: inline-flex; /* Corregido: era "inline flex" */
     width: 20px;
