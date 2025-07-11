@@ -8,18 +8,24 @@
         }
     </style>
     <script type="text/javascript" src="../Scripts/CompotamientoGenerico.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('<%= txtDto.ClientID %>').value = '';
+    });
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+	
     <section class="Secciones contenedor-v">
         <h1 class="titular-h2 margen-left-2vw">Registro</h1>
-        <h3 class="contenedor-h alineacion-inicial-centrado margen-top-2vw">¡Solo un paso más! Completá los siguientes datos para poder completar el registro.
-        </h3>
+        <h3 class="contenedor-h alineacion-inicial-centrado margen-top-2vw">¡Solo un paso más! Completá los siguientes datos para poder completar el registro.</h3>
 
         <div class="contenedor-h">
 
             <div class="contenedor-v medio">
                 <p class="txt-color-resaltado-2 txt-em9 margen-left-2vw">*Datos obligatorios.</p>
+
 
                 <div class="contenedor-v alineacion-centrado-inicial margen-2em">
 
@@ -39,6 +45,7 @@
                             <asp:Button ID="btnActualizarDatos" runat="server" Text="Actualizar"
                                 CssClass="boton-formulario margen-top-2vw"
                                 OnClick="btnActualizarDatos_Click" />
+
                         </div>
                     </div>
 
@@ -140,4 +147,5 @@
             <button class="boton-formulario" id="cancelar-modal">Aceptar</button>
         </div>
     </section>
+
 </asp:Content>

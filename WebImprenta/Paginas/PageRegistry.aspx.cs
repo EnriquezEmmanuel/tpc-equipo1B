@@ -12,9 +12,12 @@ namespace WebImprenta.Paginas
 {
     public partial class PageRegistry : System.Web.UI.Page
     {
+        protected bool Inicio;
         protected void Page_Load(object sender, EventArgs e)
         {
             txtDto.Attributes.Add("autocomplete", "off");
+            txtDto.Attributes.Add("autocomplete", "off");
+            txtDto.Attributes["name"] = "no-autofill-dto";
             if (!IsPostBack)
             {
                 Usuario usuario = (Usuario)Session["usuario"];
@@ -137,6 +140,7 @@ namespace WebImprenta.Paginas
             {
                 MjeError("Las contraseñas no coinciden.");
             }
+
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
