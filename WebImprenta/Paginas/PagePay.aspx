@@ -76,7 +76,11 @@
                 <div>
                     <button class="boton-formulario">Anular pedido</button>
                     <button class="boton-formulario">Modificar pedido</button>
-                    <button class="boton-formulario">Pagar</button>
+                    <asp:Button ID="btnPagar" Text="Pagar" class="boton-formulario" OnClick="btnPagar_Click" runat="server" />
+                    <asp:Button ID="btnAprobar" Text="Aprobar" class="boton-formulario" OnClick="btnAprobar_Click1" runat="server" />
+                    <asp:Button ID="btnRechazar" Text="Rechazar" class="boton-formulario" OnClick="btnRechazar_Click1" runat="server" />
+
+                    <%--<button class="boton-formulario">Pagar</button>--%>
                 </div>
                 <div>
                     <p class="txt-color-resaltado-1 txt-bold">*Las señas no tienen devoluciones, revisá el pedido antes de continuar</p>

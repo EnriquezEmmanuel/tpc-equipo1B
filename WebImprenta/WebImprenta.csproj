@@ -162,6 +162,7 @@
     <Content Include="Paginas\PageRecepcion.aspx" />
     <Content Include="Paginas\PageRegistry.aspx" />
     <Content Include="Paginas\PageShipping.aspx" />
+    <Content Include="Paginas\Resultado.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="RecuperarContraseña.aspx" />
     <Content Include="Registro.aspx" />
@@ -292,6 +293,13 @@
     </Compile>
     <Compile Include="Paginas\PageShipping.aspx.designer.cs">
       <DependentUpon>PageShipping.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Resultado.aspx.cs">
+      <DependentUpon>Resultado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Resultado.aspx.designer.cs">
+      <DependentUpon>Resultado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pedidos.aspx.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>
