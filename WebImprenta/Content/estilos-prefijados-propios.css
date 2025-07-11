@@ -38,7 +38,11 @@
     height: 25em;
     justify-content: center;
 }
-
+.desplegable {
+    overflow-y: hidden;
+    height: 2.5em;
+    transition: height .5s;
+}
 .tablon-claro {
     display: flex;
     padding: .2em 2em .2em 2em;
@@ -247,6 +251,13 @@
     font: 1em Roboto Slab;
     margin: 0 3em 0 1em;
 }
+.campo-formulario-registro-largo{
+    width:20em;
+}
+
+.campo-formulario-registro-corto {
+    width: 5em;
+}
 
 input:focus, select:focus, img:focus, a:focus, button:focus, p:focus, div:focus, p:focus, h1:focus, h2:focus, h3:focus, textarea:focus, span:focus {
     /*outline: 2px solid #902961;*/
@@ -316,6 +327,9 @@ input:focus, select:focus, img:focus, a:focus, button:focus, p:focus, div:focus,
     height: 30px;
     margin-right: 1em;
     filter: opacity(50%);
+}
+.imagen-icono-chica {
+    width: 1.5em;
 }
 .icono-logout {
     width: 2em;
@@ -447,6 +461,18 @@ li {
     margin: 2em;
 }
 
+.margen-left-0em3 {
+    margin-left: .3em;
+}
+
+.margen-left-0em6 {
+    margin-left: .6em;
+}
+
+.margen-left-0em9 {
+    margin-left: .9em;
+}
+
 .margen-left-2vw {
     margin-left: 2vw;
 }
@@ -467,6 +493,20 @@ li {
     margin-right: 2vw;
 }
 
+
+.margen-right-0em3 {
+    margin-right: .3em;
+}
+
+.margen-right-0em6 {
+    margin-right: .6em;
+}
+
+.margen-right-0em9 {
+    margin-right: .9em;
+}
+
+
 .margen-right-5vw {
     margin-right: 5vw;
 }
@@ -479,6 +519,18 @@ li {
     margin-right: 15vw;
 }
 
+
+.margen-top-0em3 {
+    margin-top: .3em;
+}
+
+.margen-top-0em6 {
+    margin-top: .6em;
+}
+
+.margen-top-0em9 {
+    margin-top: .9em;
+}
 
 .margen-top-1vw {
     margin-top: 1vw;

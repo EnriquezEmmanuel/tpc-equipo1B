@@ -41,24 +41,33 @@ namespace Negocio
         public bool insertarUsuarioDatos(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();
+            AccesoDatos datos2 = new AccesoDatos();
             try
             {
-                datos.setearProcedimiento("insertarUsuarioDatos");
-                datos.setearParametro("@Id", usuario.Id);
+                // Insertar datos personales
+                datos.setearConsulta("INSERT INTO UsuarioDatos (Nombre, Apellido, DNI) OUTPUT INSERTED.IdUsuarioDatos VALUES (@Nombre, @Apellido, @DNI)");
                 datos.setearParametro("@Nombre", usuario.DatosUsuario.Nombre);
                 datos.setearParametro("@Apellido", usuario.DatosUsuario.Apellido);
                 datos.setearParametro("@DNI", usuario.DatosUsuario.Dni);
-                datos.ejecutarAccion();
+                long idUsuarioDatos = (long)datos.ejecutarAccionScalar();
+
+                // Actualizar en Usuario
+                datos2.setearConsulta("UPDATE Usuario SET IdUsuarioDatos = @IdDatos WHERE Id = @IdUsuario");
+                datos2.setearParametro("@IdDatos", idUsuarioDatos);
+                datos2.setearParametro("@IdUsuario", usuario.Id);
+                datos2.ejecutarAccion();
+
+                usuario.DatosUsuario.Id = idUsuarioDatos;
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-
                 return false;
             }
             finally
             {
                 datos.cerrarConexion();
+                datos2.cerrarConexion();
             }
         }
         public DatosUsuario obtenerUsuarioDatos(int IdUser)

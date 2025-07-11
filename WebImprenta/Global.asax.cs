@@ -7,6 +7,8 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Optimization;
 using MercadoPago;
+using MercadoPago.DataStructures.Preference;
+using MercadoPago.Resources;
 
 namespace WebImprenta
 {
@@ -18,6 +20,7 @@ namespace WebImprenta
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             MercadoPago.SDK.AccessToken = "TEST-3588495048196312-052919-93b5e1aaa6b3aaee47ef6872e11badd8-329610443";
+            
         }
     }
 }

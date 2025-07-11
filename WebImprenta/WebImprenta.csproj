@@ -158,10 +158,12 @@
     <Content Include="Paginas\PageCatalog.aspx" />
     <Content Include="Paginas\PageEntry.aspx" />
     <Content Include="Paginas\PageLossPass.aspx" />
+    <Content Include="Paginas\PageMPfalsa.aspx" />
     <Content Include="Paginas\PagePay.aspx" />
     <Content Include="Paginas\PageRecepcion.aspx" />
     <Content Include="Paginas\PageRegistry.aspx" />
     <Content Include="Paginas\PageShipping.aspx" />
+    <Content Include="Paginas\Resultado.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="RecuperarContraseña.aspx" />
     <Content Include="Registro.aspx" />
@@ -265,6 +267,13 @@
     <Compile Include="Paginas\PageLossPass.aspx.designer.cs">
       <DependentUpon>PageLossPass.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Paginas\PageMPfalsa.aspx.cs">
+      <DependentUpon>PageMPfalsa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\PageMPfalsa.aspx.designer.cs">
+      <DependentUpon>PageMPfalsa.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\PagePay.aspx.cs">
       <DependentUpon>PagePay.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,6 +301,13 @@
     </Compile>
     <Compile Include="Paginas\PageShipping.aspx.designer.cs">
       <DependentUpon>PageShipping.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Resultado.aspx.cs">
+      <DependentUpon>Resultado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Resultado.aspx.designer.cs">
+      <DependentUpon>Resultado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pedidos.aspx.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>
